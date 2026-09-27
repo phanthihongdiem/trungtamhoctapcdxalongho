@@ -90,4 +90,13 @@ export interface RegistrationItem {
 
 export type UserRole = 'citizen' | 'admin';
 
+export interface AdminUser {
+  username: string;
+  fullName: string;
+  roleTitle: string;
+  agency: string;
+  loginAt: string;
+}
+
 export type MainNavTab = 'overview' | 'documents' | 'upload' | 'announcements' | 'schedules';
+

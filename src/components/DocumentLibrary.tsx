@@ -13,12 +13,15 @@ import {
   Calendar,
   FileCheck2,
   ArrowUpDown,
-  BookOpen
+  BookOpen,
+  Lock
 } from 'lucide-react';
 
 interface DocumentLibraryProps {
   documents: DocumentItem[];
   userRole: UserRole;
+  isAdmin: boolean;
+  onRequestAdminLogin: () => void;
   onOpenDocument: (doc: DocumentItem) => void;
   onDownloadDocument: (doc: DocumentItem) => void;
   onOpenUploadModal: () => void;
@@ -30,6 +33,8 @@ interface DocumentLibraryProps {
 export const DocumentLibrary: React.FC<DocumentLibraryProps> = ({
   documents,
   userRole,
+  isAdmin,
+  onRequestAdminLogin,
   onOpenDocument,
   onDownloadDocument,
   onOpenUploadModal,
@@ -41,6 +46,14 @@ export const DocumentLibrary: React.FC<DocumentLibraryProps> = ({
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
   const [sortBy, setSortBy] = useState<'date' | 'views' | 'downloads'>('date');
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
+
+  const handleUploadTrigger = () => {
+    if (!isAdmin) {
+      onRequestAdminLogin();
+    } else {
+      onOpenUploadModal();
+    }
+  };
 
   const categories: { id: DocumentCategory; label: string }[] = [
     { id: 'all', label: 'Tất cả tài liệu' },
@@ -107,11 +120,20 @@ export const DocumentLibrary: React.FC<DocumentLibraryProps> = ({
         {/* Upload Action */}
         <div className="flex items-center gap-3">
           <button
-            onClick={onOpenUploadModal}
-            className="px-4 py-2 bg-amber-700 hover:bg-amber-600 text-white rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors shadow-sm whitespace-nowrap"
+            onClick={handleUploadTrigger}
+            title={isAdmin ? 'Đưa tài liệu mới lên web' : 'Chỉ tài khoản quản trị mới có quyền đưa tài liệu lên'}
+            className={`px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors shadow-sm whitespace-nowrap border ${
+              isAdmin
+                ? 'bg-amber-700 hover:bg-amber-600 text-white border-amber-600'
+                : 'bg-stone-100 hover:bg-stone-200 text-stone-700 border-stone-300'
+            }`}
           >
-            <PlusCircle className="w-4 h-4" />
-            <span>Đưa tài liệu mới lên web</span>
+            {isAdmin ? (
+              <PlusCircle className="w-4 h-4 text-white" />
+            ) : (
+              <Lock className="w-4 h-4 text-amber-700" />
+            )}
+            <span>Đưa tài liệu mới lên web {isAdmin ? '' : '(Dành cho Quản trị)'}</span>
           </button>
         </div>
       </div>
@@ -176,7 +198,7 @@ export const DocumentLibrary: React.FC<DocumentLibraryProps> = ({
       </div>
 
       {/* Admin Quick Banner */}
-      {userRole === 'admin' && (
+      {isAdmin && (
         <div className="mt-4 p-3 bg-amber-50 border border-amber-300 rounded-lg text-xs text-amber-900 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <FileCheck2 className="w-4 h-4 text-amber-700" />
@@ -185,7 +207,7 @@ export const DocumentLibrary: React.FC<DocumentLibraryProps> = ({
             </span>
           </div>
           <button
-            onClick={onOpenUploadModal}
+            onClick={handleUploadTrigger}
             className="text-amber-800 underline font-semibold hover:text-amber-950 shrink-0"
           >
             + Tải lên ngay
@@ -215,7 +237,7 @@ export const DocumentLibrary: React.FC<DocumentLibraryProps> = ({
                 Xóa bộ lọc tra cứu
               </button>
               <button
-                onClick={onOpenUploadModal}
+                onClick={handleUploadTrigger}
                 className="px-3 py-1.5 bg-amber-700 text-white rounded text-xs font-medium hover:bg-amber-600 transition-colors"
               >
                 Đưa tài liệu mới lên
@@ -301,7 +323,7 @@ export const DocumentLibrary: React.FC<DocumentLibraryProps> = ({
                   </div>
 
                   {/* Admin controls */}
-                  {userRole === 'admin' && (
+                  {isAdmin && (
                     <div className="flex items-center gap-1 border-l border-stone-200 pl-2">
                       <button
                         onClick={() => onTogglePin(doc.id)}

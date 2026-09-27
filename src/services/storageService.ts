@@ -2,7 +2,8 @@ import {
   DocumentItem, 
   AnnouncementItem, 
   ClassScheduleItem, 
-  RegistrationItem 
+  RegistrationItem,
+  AdminUser
 } from '../types';
 import { 
   INITIAL_DOCUMENTS, 
@@ -16,10 +17,86 @@ const STORAGE_KEYS = {
   ANNOUNCEMENTS: 'longho_learning_center_announcements_v1',
   CLASSES: 'longho_learning_center_classes_v1',
   REGISTRATIONS: 'longho_learning_center_registrations_v1',
-  USER_ROLE: 'longho_learning_center_user_role_v1',
+  ADMIN_SESSION: 'longho_learning_center_admin_session_v1',
 };
 
+const VALID_ADMINS = [
+  {
+    username: 'admin',
+    passwords: ['123456', 'longho2026', 'admin123'],
+    fullName: 'Đ/c Nguyễn Văn Hùng',
+    roleTitle: 'Phó Chủ tịch UBND Xã kiêm Giám đốc TT HTCĐ',
+    agency: 'Ban Giám đốc TT HTCĐ Xã Long Hồ',
+  },
+  {
+    username: 'bql_longho',
+    passwords: ['123456', 'longho2026'],
+    fullName: 'Đ/c Lê Thị Tuyết Nga',
+    roleTitle: 'Cán bộ Thường trực Phụ trách Học tập',
+    agency: 'Bộ phận Văn hóa - Xã hội & TT HTCĐ',
+  },
+  {
+    username: 'chuyendoiso',
+    passwords: ['123456', 'longho2026'],
+    fullName: 'Đ/c Phan Minh Trí',
+    roleTitle: 'Tổ trưởng Tổ Công nghệ Số Cộng đồng',
+    agency: 'Đoàn Thanh niên & Tổ CĐS Xã Long Hồ',
+  }
+];
+
 export const storageService = {
+  // Admin Session & Authentication
+  getAdminSession: (): AdminUser | null => {
+    try {
+      const data = localStorage.getItem(STORAGE_KEYS.ADMIN_SESSION);
+      if (!data) return null;
+      return JSON.parse(data);
+    } catch {
+      return null;
+    }
+  },
+
+  setAdminSession: (user: AdminUser | null) => {
+    try {
+      if (user) {
+        localStorage.setItem(STORAGE_KEYS.ADMIN_SESSION, JSON.stringify(user));
+      } else {
+        localStorage.removeItem(STORAGE_KEYS.ADMIN_SESSION);
+      }
+    } catch (e) {
+      console.error('Error saving admin session', e);
+    }
+  },
+
+  verifyAdminCredentials: (username: string, password: string): { success: boolean; user?: AdminUser; error?: string } => {
+    const trimmedUser = username.trim().toLowerCase();
+    const trimmedPass = password.trim();
+
+    const matched = VALID_ADMINS.find(
+      (a) => a.username.toLowerCase() === trimmedUser && a.passwords.includes(trimmedPass)
+    );
+
+    if (matched) {
+      const adminUser: AdminUser = {
+        username: matched.username,
+        fullName: matched.fullName,
+        roleTitle: matched.roleTitle,
+        agency: matched.agency,
+        loginAt: new Date().toISOString(),
+      };
+      storageService.setAdminSession(adminUser);
+      return { success: true, user: adminUser };
+    }
+
+    return { 
+      success: false, 
+      error: 'Tài khoản hoặc mật khẩu quản trị không chính xác. Vui lòng kiểm tra lại.' 
+    };
+  },
+
+  logoutAdmin: () => {
+    storageService.setAdminSession(null);
+  },
   // Documents
   getDocuments: (): DocumentItem[] => {
     try {
@@ -28,7 +105,15 @@ export const storageService = {
         localStorage.setItem(STORAGE_KEYS.DOCUMENTS, JSON.stringify(INITIAL_DOCUMENTS));
         return INITIAL_DOCUMENTS;
       }
-      return JSON.parse(data);
+      const existing: DocumentItem[] = JSON.parse(data);
+      const existingIds = new Set(existing.map(d => d.id));
+      const missing = INITIAL_DOCUMENTS.filter(d => !existingIds.has(d.id));
+      if (missing.length > 0) {
+        const merged = [...missing, ...existing];
+        localStorage.setItem(STORAGE_KEYS.DOCUMENTS, JSON.stringify(merged));
+        return merged;
+      }
+      return existing;
     } catch {
       return INITIAL_DOCUMENTS;
     }
@@ -93,7 +178,15 @@ export const storageService = {
         localStorage.setItem(STORAGE_KEYS.ANNOUNCEMENTS, JSON.stringify(INITIAL_ANNOUNCEMENTS));
         return INITIAL_ANNOUNCEMENTS;
       }
-      return JSON.parse(data);
+      const existing: AnnouncementItem[] = JSON.parse(data);
+      const existingIds = new Set(existing.map(a => a.id));
+      const missing = INITIAL_ANNOUNCEMENTS.filter(a => !existingIds.has(a.id));
+      if (missing.length > 0) {
+        const merged = [...missing, ...existing];
+        localStorage.setItem(STORAGE_KEYS.ANNOUNCEMENTS, JSON.stringify(merged));
+        return merged;
+      }
+      return existing;
     } catch {
       return INITIAL_ANNOUNCEMENTS;
     }
@@ -129,7 +222,15 @@ export const storageService = {
         localStorage.setItem(STORAGE_KEYS.CLASSES, JSON.stringify(INITIAL_CLASSES));
         return INITIAL_CLASSES;
       }
-      return JSON.parse(data);
+      const existing: ClassScheduleItem[] = JSON.parse(data);
+      const existingIds = new Set(existing.map(c => c.id));
+      const missing = INITIAL_CLASSES.filter(c => !existingIds.has(c.id));
+      if (missing.length > 0) {
+        const merged = [...missing, ...existing];
+        localStorage.setItem(STORAGE_KEYS.CLASSES, JSON.stringify(merged));
+        return merged;
+      }
+      return existing;
     } catch {
       return INITIAL_CLASSES;
     }

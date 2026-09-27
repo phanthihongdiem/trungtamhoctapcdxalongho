@@ -10,7 +10,8 @@ import {
   ClassScheduleItem, 
   RegistrationItem, 
   MainNavTab, 
-  UserRole 
+  UserRole,
+  AdminUser
 } from './types';
 import { storageService } from './services/storageService';
 import { Header } from './components/Header';
@@ -19,6 +20,7 @@ import { OverviewSection } from './components/OverviewSection';
 import { DocumentLibrary } from './components/DocumentLibrary';
 import { DocumentModal } from './components/DocumentModal';
 import { UploadDocumentModal } from './components/UploadDocumentModal';
+import { AdminLoginModal } from './components/AdminLoginModal';
 import { AnnouncementsView } from './components/AnnouncementsView';
 import { ScheduleView } from './components/ScheduleView';
 import { GlobalSearchModal } from './components/GlobalSearchModal';
@@ -31,14 +33,19 @@ export default function App() {
   const [registrations, setRegistrations] = useState<RegistrationItem[]>([]);
   
   const [activeTab, setActiveTab] = useState<MainNavTab>('overview');
+  const [currentAdmin, setCurrentAdmin] = useState<AdminUser | null>(null);
   const [userRole, setUserRole] = useState<UserRole>('citizen');
   
   const [activeDocument, setActiveDocument] = useState<DocumentItem | null>(null);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [isAdminLoginModalOpen, setIsAdminLoginModalOpen] = useState(false);
+  const [adminActionReason, setAdminActionReason] = useState('để đưa tài liệu học tập lên trang web');
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const [searchInitialQuery, setSearchInitialQuery] = useState('');
   const [highlightClassId, setHighlightClassId] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const isAdmin = !!currentAdmin;
 
   // Load data on mount
   useEffect(() => {
@@ -46,6 +53,12 @@ export default function App() {
     setAnnouncements(storageService.getAnnouncements());
     setClasses(storageService.getClasses());
     setRegistrations(storageService.getRegistrations());
+
+    const savedAdmin = storageService.getAdminSession();
+    if (savedAdmin) {
+      setCurrentAdmin(savedAdmin);
+      setUserRole('admin');
+    }
   }, []);
 
   const showToast = useCallback((msg: string) => {
@@ -55,7 +68,33 @@ export default function App() {
     }, 3200);
   }, []);
 
-  // Global Keyboard Shortcut: Ctrl+K / Cmd+K / /
+  // Authentication & Permission Handlers
+  const handleOpenUploadWithAuth = () => {
+    if (!currentAdmin) {
+      setAdminActionReason('để đưa tài liệu và bài giảng lên trang web');
+      setIsAdminLoginModalOpen(true);
+    } else {
+      setIsUploadModalOpen(true);
+    }
+  };
+
+  const handleLoginSuccess = (admin: AdminUser) => {
+    setCurrentAdmin(admin);
+    setUserRole('admin');
+    showToast(`Đăng nhập thành công: ${admin.fullName} (${admin.roleTitle})`);
+    // Open the upload modal immediately as intended
+    setIsUploadModalOpen(true);
+  };
+
+  const handleLogoutAdmin = () => {
+    storageService.logoutAdmin();
+    setCurrentAdmin(null);
+    setUserRole('citizen');
+    setIsUploadModalOpen(false);
+    showToast('Đã đăng xuất tài khoản Quản trị viên. Chuyển về chế độ người dân.');
+  };
+
+  // Global Keyboard Shortcut: Ctrl+K / Cmd+K
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
@@ -132,12 +171,22 @@ Trân trọng phục vụ việc học tập suốt đời của bà con nhân d
   };
 
   const handleAddDocument = (newDoc: DocumentItem) => {
+    if (!isAdmin) {
+      setAdminActionReason('để đưa tài liệu học tập lên trang web');
+      setIsAdminLoginModalOpen(true);
+      return;
+    }
     const updated = storageService.addDocument(newDoc);
     setDocuments(updated);
-    showToast(`Đã đưa tài liệu "${newDoc.title}" lên web thành công!`);
+    showToast(`Đã xuất bản tài liệu "${newDoc.title}" lên website thành công!`);
   };
 
   const handleTogglePinDocument = (id: string) => {
+    if (!isAdmin) {
+      setAdminActionReason('để ghim tài liệu ưu tiên lên đầu trang');
+      setIsAdminLoginModalOpen(true);
+      return;
+    }
     const doc = documents.find((d) => d.id === id);
     if (!doc) return;
     const updatedDoc = { ...doc, isPinned: !doc.isPinned };
@@ -147,6 +196,11 @@ Trân trọng phục vụ việc học tập suốt đời của bà con nhân d
   };
 
   const handleDeleteDocument = (id: string) => {
+    if (!isAdmin) {
+      setAdminActionReason('để xóa tài liệu khỏi kho lưu trữ');
+      setIsAdminLoginModalOpen(true);
+      return;
+    }
     const updated = storageService.deleteDocument(id);
     setDocuments(updated);
     showToast('Đã xóa tài liệu khỏi danh mục.');
@@ -154,12 +208,22 @@ Trân trọng phục vụ việc học tập suốt đời của bà con nhân d
 
   // Handlers for Announcements
   const handleAddAnnouncement = (newNotice: AnnouncementItem) => {
+    if (!isAdmin) {
+      setAdminActionReason('để đăng thông báo chính thức lên bảng tin');
+      setIsAdminLoginModalOpen(true);
+      return;
+    }
     const updated = storageService.addAnnouncement(newNotice);
     setAnnouncements(updated);
     showToast('Đã đăng thông báo mới lên website.');
   };
 
   const handleDeleteAnnouncement = (id: string) => {
+    if (!isAdmin) {
+      setAdminActionReason('để xóa thông báo');
+      setIsAdminLoginModalOpen(true);
+      return;
+    }
     const updated = storageService.deleteAnnouncement(id);
     setAnnouncements(updated);
     showToast('Đã xóa thông báo.');
@@ -167,12 +231,22 @@ Trân trọng phục vụ việc học tập suốt đời của bà con nhân d
 
   // Handlers for Classes
   const handleAddClass = (newClass: ClassScheduleItem) => {
+    if (!isAdmin) {
+      setAdminActionReason('để mở lớp học mới lên thời khóa biểu');
+      setIsAdminLoginModalOpen(true);
+      return;
+    }
     const updated = storageService.addClass(newClass);
     setClasses(updated);
     showToast(`Đã thêm lớp học "${newClass.title}" vào lịch.`);
   };
 
   const handleDeleteClass = (id: string) => {
+    if (!isAdmin) {
+      setAdminActionReason('để xóa lớp học khỏi lịch đào tạo');
+      setIsAdminLoginModalOpen(true);
+      return;
+    }
     const updated = storageService.deleteClass(id);
     setClasses(updated);
     showToast('Đã xóa lớp học khỏi lịch đào tạo.');
@@ -233,29 +307,27 @@ Trân trọng phục vụ việc học tập suốt đời của bà con nhân d
         activeTab={activeTab}
         onSelectTab={setActiveTab}
         userRole={userRole}
-        onToggleUserRole={() => {
-          const nextRole = userRole === 'citizen' ? 'admin' : 'citizen';
-          setUserRole(nextRole);
-          showToast(
-            nextRole === 'admin'
-              ? 'Đã chuyển sang chế độ Ban Quản lý (Được phép thêm, sửa, xóa, ghim tài liệu)'
-              : 'Đã chuyển sang chế độ Học viên & Người dân'
-          );
+        currentAdmin={currentAdmin}
+        onOpenAdminLogin={() => {
+          setAdminActionReason('để truy cập bảng điều khiển và đăng tải nội dung');
+          setIsAdminLoginModalOpen(true);
         }}
+        onLogoutAdmin={handleLogoutAdmin}
         onOpenSearch={() => setIsSearchModalOpen(true)}
-        onOpenUploadModal={() => setIsUploadModalOpen(true)}
+        onOpenUploadModal={handleOpenUploadWithAuth}
         pendingNoticeCount={announcements.filter((a) => a.priority === 'urgent').length}
       />
 
       {/* Main View Area */}
       <main className="flex-1">
-        {/* Hero is shown on Overview or can be toggled */}
+        {/* Hero is shown on Overview */}
         {activeTab === 'overview' && (
           <>
             <HeroBanner
               onSelectTab={setActiveTab}
-              onOpenUpload={() => setIsUploadModalOpen(true)}
+              onOpenUpload={handleOpenUploadWithAuth}
               onSearchSubmit={handleHeroSearch}
+              isAdmin={isAdmin}
               totalDocuments={documents.length}
               totalClasses={classes.length}
               totalRegistrations={registrations.length}
@@ -282,9 +354,14 @@ Trân trọng phục vụ việc học tập suốt đời của bà con nhân d
           <DocumentLibrary
             documents={documents}
             userRole={userRole}
+            isAdmin={isAdmin}
+            onRequestAdminLogin={() => {
+              setAdminActionReason('để đưa tài liệu học tập lên trang web');
+              setIsAdminLoginModalOpen(true);
+            }}
             onOpenDocument={handleOpenDocument}
             onDownloadDocument={handleDownloadDocument}
-            onOpenUploadModal={() => setIsUploadModalOpen(true)}
+            onOpenUploadModal={handleOpenUploadWithAuth}
             onTogglePin={handleTogglePinDocument}
             onDeleteDocument={handleDeleteDocument}
             initialSearchQuery={searchInitialQuery}
@@ -326,14 +403,29 @@ Trân trọng phục vụ việc học tập suốt đời của bà con nhân d
         onDownload={handleDownloadDocument}
       />
 
-      {/* 2. Upload Document Modal */}
+      {/* 2. Upload Document Modal with RBAC checks */}
       <UploadDocumentModal
         isOpen={isUploadModalOpen}
         onClose={() => setIsUploadModalOpen(false)}
         onAddDocument={handleAddDocument}
+        isAdmin={isAdmin}
+        currentAdmin={currentAdmin}
+        onRequestLogin={() => {
+          setIsUploadModalOpen(false);
+          setAdminActionReason('để đưa tài liệu học tập lên trang web');
+          setIsAdminLoginModalOpen(true);
+        }}
       />
 
-      {/* 3. Fast Global Search Modal */}
+      {/* 3. Admin Authentication Modal */}
+      <AdminLoginModal
+        isOpen={isAdminLoginModalOpen}
+        onClose={() => setIsAdminLoginModalOpen(false)}
+        onLoginSuccess={handleLoginSuccess}
+        actionReason={adminActionReason}
+      />
+
+      {/* 4. Fast Global Search Modal */}
       <GlobalSearchModal
         isOpen={isSearchModalOpen}
         onClose={() => setIsSearchModalOpen(false)}

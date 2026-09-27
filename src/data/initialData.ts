@@ -8,10 +8,572 @@ export const HAMLETS_LIST = [
   'Ấp Thạnh Hưng',
   'Ấp Bình Hòa',
   'Ấp Tân Hưng',
+  'Ấp An Hiệp',
+  'Ấp An Thành',
   'Khu vực Thị tứ Long Hồ',
 ];
 
 export const INITIAL_DOCUMENTS: DocumentItem[] = [
+  // --- TÀI LIỆU VỪA CẬP NHẬT TỪ HỒ SƠ CHÍNH THỨC CỦA XÃ LONG HỒ ---
+  {
+    id: 'doc-mobifone-ai-giao-trinh',
+    title: 'Giáo trình Đào tạo AI cho Công chức, Viên chức, Người lao động Phường/Xã – Đề cương 1: AI Hỗ trợ Công việc Hằng ngày',
+    codeNumber: 'GT-01/AI-MBFVL2026',
+    category: 'chuyen_doi_so',
+    categoryLabel: 'Chuyển đổi số & Dịch vụ công',
+    issuer: 'Trung tâm Kinh doanh Giải pháp số - MobiFone Vĩnh Long',
+    author: 'MobiFone Vĩnh Long',
+    publishDate: '2026-07-01',
+    summary: 'Giáo trình toàn diện của MobiFone Vĩnh Long hướng dẫn ứng dụng Trí tuệ nhân tạo (AI) trong công việc hành chính cấp xã: viết Prompt 5 thành phần, soạn thảo văn bản hành chính chuẩn mực, tóm tắt tài liệu dài bằng Google NotebookLM, tạo bài thuyết trình bằng Gamma.app và quy trình an toàn bảo mật dữ liệu công vụ.',
+    content: `LỜI NÓI ĐẦU:
+Trong bối cảnh công cuộc Chuyển đổi số quốc gia đang diễn ra mạnh mẽ, việc hiện đại hóa nền hành chính cấp cơ sở là nhiệm vụ chiến lược hàng đầu. Đối với tỉnh Vĩnh Long, nâng cao năng lực số cho đội ngũ công chức, viên chức, người lao động cấp xã/phường chính là chìa khóa để xây dựng một chính quyền phục vụ Nhân dân tinh gọn, hiệu lực và hiệu quả.
+Tài liệu được xây dựng theo phương châm “Dễ hiểu – Thiết thực – Ứng dụng ngay”, tập trung hướng dẫn làm chủ kỹ năng viết câu lệnh khoa học để ứng dụng trực tiếp vào công việc văn phòng hằng ngày.
+
+CHƯƠNG 1. TỔNG QUAN VỀ AI TRONG CÔNG VIỆC HÀNH CHÍNH XÃ/PHƯỜNG
+1. Bản chất lý thuyết của AI: 4 nhóm năng lực cốt lõi gồm: Tư duy như con người, Hành vi như con người, Tư duy hợp lý, Hành vi hợp lý.
+2. Ứng dụng thực tế:
+- Hỗ trợ soạn thảo khung văn bản, cải thiện văn phong hành chính trang trọng, kiểm tra lỗi chính tả và ngữ pháp trước khi trình ký.
+- Tóm tắt và hỏi đáp trực tiếp với các tài liệu quy phạm pháp luật, chỉ thị, nghị quyết dài hàng chục trang.
+- Tạo slide thuyết trình, sơ đồ tư duy quy trình thủ tục hành chính, tạo hình ảnh minh họa phục vụ cổ động, tuyên truyền trực quan.
+3. Việc NÊN và KHÔNG NÊN:
+- NÊN: Rà soát tóm tắt văn bản cũ - mới, lên khung thông báo, thư mời, dịch thuật phổ thông, kiểm tra lỗi chính tả lặp đi lặp lại.
+- KHÔNG NÊN: Ra quyết định hành chính có tính pháp lý (phê duyệt hồ sơ, xử phạt, ký đóng dấu bắt buộc phải do con người kiểm tra và chịu trách nhiệm); Xử lý công việc cần sự thấu cảm (hòa giải tranh chấp đất đai, tiếp dân khiếu nại); Tuyệt đối không nhập văn bản mật của Đảng, Nhà nước, thông tin định danh cá nhân nhạy cảm lên AI công cộng.
+
+CHƯƠNG 2. CÁCH VIẾT PROMPT HIỆU QUẢ TRONG CÔNG VIỆC HÀNH CHÍNH
+Cấu trúc Prompt 5 thành phần cốt lõi:
+1. Vai trò (Role): Gán cho AI một danh tính cụ thể (Ví dụ: "Bạn là Chánh văn phòng UBND xã", "Bạn là chuyên gia lưu trữ").
+2. Nhiệm vụ (Task): Nói rõ hành động cần thực hiện bằng động từ mạnh (Soạn thảo, tóm tắt, kiểm tra lỗi, lập kế hoạch).
+3. Dữ liệu đầu vào (Inputs): Cung cấp thông tin nền, tài liệu, số liệu hoặc bối cảnh (không để AI tự đoán).
+4. Yêu cầu đầu ra (Outputs): Quy định hình thức thể hiện (mẫu văn bản hành chính, dạng bảng, gạch đầu dòng, độ dài).
+5. Tiêu chí kiểm tra (Constraints): Giới hạn, quy tắc bắt buộc tuân thủ (ngôn từ trang trọng, khách quan, không dùng từ địa phương, không tự ý bịa số liệu).
+
+CHƯƠNG 3. ỨNG DỤNG AI TRONG SOẠN THẢO VĂN BẢN HÀNH CHÍNH
+- Hướng dẫn soạn Thông báo, Kế hoạch ngắn, Báo cáo tuần/tháng, Thư mời/Giấy mời, Lịch công tác tuần.
+- Kỹ năng nâng cao: Sử dụng từ khóa hiệu chỉnh để ép AI vào giọng văn hành chính công quyền (nghiêm túc, trang trọng, lược bỏ từ ngữ bay bổng sáo rỗng).
+
+CHƯƠNG 4. TÓM TẮT VÀ HỎI ĐÁP TÀI LIỆU DÀI VỚI GOOGLE NOTEBOOKLM
+- Nguyên tắc "Chỉ nói có sách, mách có chứng": AI chỉ trả lời dựa trên đúng tài liệu tải lên kèm số trích dẫn chính xác đến từng dòng, loại bỏ hiện tượng ảo giác.
+- Hỗ trợ đa dạng nguồn: PDF, DOCX, TXT, link YouTube, file âm thanh ghi âm.
+- Tính năng Audio Overview: Tự động chuyển đổi tài liệu thành podcast thảo luận giữa 2 chuyên gia AI.
+
+CHƯƠNG 5. TẠO SLIDE, SƠ ĐỒ BẰNG CÔNG CỤ GAMMA (GAMMA.APP)
+- Quy trình 3 bước: Chuẩn bị tài liệu nguồn -> Tinh giản nội dung -> Chọn công cụ Gamma và viết prompt tạo slide trình chiếu chuyên nghiệp.
+
+CHƯƠNG 6. AN TOÀN DỮ LIỆU KHI DÙNG AI TẠI CƠ QUAN CẤP XÃ
+- 4 nguyên tắc sử dụng AI an toàn:
+1. Không đưa dữ liệu thật lên AI công cộng (ẩn tên, xóa số CCCD, địa chỉ, số điện thoại).
+2. Kiểm chứng mọi thông tin do AI tạo ra với văn bản quy phạm pháp luật.
+3. Sử dụng tài khoản bảo mật cao, mật khẩu mạnh và bật MFA.
+4. Chỉ sử dụng các nền tảng AI được cơ quan nhà nước cho phép.
+- Quy trình 5 bước sử dụng AI: Xác định mục đích -> Kiểm tra dữ liệu đầu vào -> Sử dụng AI -> Rà soát kết quả -> Lưu trữ và quản lý kết quả.`,
+    keyTakeaways: [
+      'Làm chủ công thức Prompt chuẩn 5 thành phần: Vai trò + Nhiệm vụ + Dữ liệu đầu vào + Yêu cầu đầu ra + Tiêu chí kiểm tra.',
+      'Sử dụng Google NotebookLM để đọc hiểu, trích dẫn văn bản quy phạm pháp luật không bị sai lệch hoặc ảo giác.',
+      'Ứng dụng Gamma.app tạo slide báo cáo hành chính, sơ đồ quy trình thủ tục chỉ trong vài phút.',
+      'Tuyệt đối tuân thủ 4 nguyên tắc bảo đảm an toàn dữ liệu công vụ, không nhập thông tin mật và dữ liệu cá nhân của công dân lên AI công cộng.'
+    ],
+    fileFormat: 'PDF',
+    fileSize: '8.4 MB',
+    pageCount: 30,
+    downloadCount: 456,
+    views: 1820,
+    isPinned: true,
+    targetAudience: 'Cán bộ, công chức, người hoạt động không chuyên trách cấp xã/phường, đoàn thể địa phương',
+    fileName: 'Giao-Trinh-Dao-Tao-AI-Cong-Chuc-Xa-MobiFone-Vinh-Long-2026.pdf',
+    isOfficialApproved: true,
+  },
+  {
+    id: 'doc-slide-ai-thuc-hanh-can-bo-xa',
+    title: 'Bài giảng Slide: AI Thực hành cho Cán bộ Cấp Xã – Soạn thảo, Khai thác Tài liệu, Hỗ trợ Dữ liệu và Tuân thủ Số',
+    codeNumber: 'BG-05/AI-MBF5G',
+    category: 'chuyen_doi_so',
+    categoryLabel: 'Chuyển đổi số & Dịch vụ công',
+    issuer: 'MobiFone 5G Vĩnh Long phối hợp UBND Xã Long Hồ',
+    author: 'Tổ Chuyên gia Giải pháp số MobiFone Vĩnh Long',
+    publishDate: '2026-07-20',
+    summary: 'Bộ tài liệu trình chiếu trực quan phục vụ lớp tập huấn chuyển đổi số xã Long Hồ: Giới thiệu hệ sinh thái AI (Gemini, ChatGPT, Claude, Canva, Copilot), các bài tập thực hành viết prompt thực tế (soạn bài tuyên truyền sốt xuất huyết, phòng chống ma túy học đường, đăng ký khai sinh trực tuyến) và cẩm nang bảo đảm an ninh mạng.',
+    content: `BỘ BÀI GIẢNG ĐÀO TẠO TRỰC QUAN GỒM 5 CHƯƠNG CHÍNH:
+
+CHƯƠNG 1: TỔNG QUAN VỀ AI VÀ HỆ SINH THÁI CÔNG CỤ
+- Phân biệt các công cụ phổ biến: ChatGPT, Google Gemini, Claude, Canva, Gamma AI, Copilot.
+- Quét mã QR tham gia nhóm Zalo hỗ trợ kỹ thuật "Xã Long Hồ_Tập huấn chuyển đổi số".
+
+CHƯƠNG 2: AN TOÀN DỮ LIỆU KHI DÙNG AI
+- Nhận diện hiện tượng ảo giác (Hallucination) trong AI: AI tạo thông tin nghe hợp lý nhưng hoàn toàn bịa đặt.
+- Trách nhiệm pháp lý và đạo đức của công chức khi kiểm duyệt văn bản.
+- Danh mục dữ liệu tuyệt đối cấm nhập lên AI công cộng: Bí mật nhà nước, dữ liệu nội bộ cơ quan, dữ liệu cá nhân nhạy cảm, hồ sơ đất đai, hộ tịch, khiếu nại tố cáo.
+
+CHƯƠNG 3: CẤU TRÚC PROMPT VÀ BÀI TẬP TÌNH HUỐNG
+- Khung Prompt mẫu 5 thành phần cho văn phòng xã.
+- Bài tập mẫu 1: Viết bài tuyên truyền phòng chống sốt xuất huyết dưới 300 từ cho loa truyền thanh và Zalo ấp với thông điệp "Không có lăng quăng, không có sốt xuất huyết".
+- Bài tập mẫu 2: Viết bài tuyên truyền nhận biết ma túy mới núp bóng bánh kẹo, trà sữa, nước vui và thuốc lá điện tử.
+- Bài tập mẫu 3: Soạn bài hướng dẫn công dân nộp hồ sơ đăng ký khai sinh trực tuyến trên Cổng dịch vụ công quốc gia, nhận kết quả tại nhà qua bưu điện.
+
+CHƯƠNG 4: AI VÀ QUẢN LÝ TRI THỨC VỚI GEMINI NOTEBOOK / NOTEBOOKLM
+- Trợ lý đọc tài liệu tiết kiệm 80% thời gian nghiên cứu báo cáo dài.
+- 4 bước khởi tạo, nạp tài liệu và viết câu hỏi truy vấn trực tiếp.
+
+CHƯƠNG 5: NHẬN DIỆN VÀ PHÒNG TRÁNH LỪA ĐẢO TRỰC TUYẾN
+- Các thủ đoạn phổ biến: Giả danh công an/cơ quan nhà nước gọi đe dọa, giả mạo tin nhắn ngân hàng/điện lực, chiêu trò làm nhiệm vụ nạp tiền đầu tư hoa hồng cao.
+- 3 nguyên tắc vàng phòng tránh: Không nhấp đường link lạ; Không cung cấp OTP, mật khẩu cho bất kỳ ai; Xác minh trực tiếp với cơ quan công an địa phương.`,
+    keyTakeaways: [
+      'Trực quan hóa toàn bộ kỹ năng thực hành AI cho công chức xã qua 26 slide bài giảng.',
+      'Bộ bài tập mẫu gắn liền với nghiệp vụ hàng ngày của cán bộ tư pháp, văn hóa, công an xã.',
+      'Trang bị bộ lọc an ninh mạng, nhận diện chiêu trò lừa đảo qua không gian mạng cho bà con.'
+    ],
+    fileFormat: 'PPTX',
+    fileSize: '15.8 MB',
+    pageCount: 26,
+    downloadCount: 388,
+    views: 1420,
+    isPinned: true,
+    targetAudience: 'Cán bộ công chức UBND xã, bí thư chi bộ, trưởng các ấp và tổ công nghệ số cộng đồng',
+    fileName: 'Slide-Tap-Huan-AI-Thuc-Hanh-Can-Bo-Xa-Long-Ho.pptx',
+    isOfficialApproved: true,
+  },
+  {
+    id: 'doc-kh-binh-dan-hoc-vu-so',
+    title: 'Kế hoạch số 149/KH-UBND: Tập huấn Kỹ năng Số cho Người dân Trưởng thành & Thực hiện Phong trào "Bình dân Học vụ Số" trên Địa bàn Xã Long Hồ',
+    codeNumber: '149/KH-UBND',
+    category: 'chuyen_doi_so',
+    categoryLabel: 'Chuyển đổi số & Dịch vụ công',
+    issuer: 'Ủy Ban Nhân Dân Xã Long Hồ',
+    author: 'TM. UBND Xã - KT. Chủ tịch - Phó Chủ tịch Nguyễn Thị Mỹ Hạnh',
+    publishDate: '2026-07-15',
+    summary: 'Kế hoạch trọng điểm của UBND Xã Long Hồ thực hiện Nghị quyết 57-NQ/TW của Bộ Chính trị: Phổ cập kỹ năng số cho 100% người dân trưởng thành tại 13 ấp từ ngày 16/7 đến 24/7/2026; cẩm nang hướng dẫn chi tiết cách đăng nhập Nền tảng Bình dân học vụ số (MOOC Bộ Công An) qua VNeID, tham gia các khóa học Đề án 06 và làm bài thi nhận chứng nhận.',
+    content: `CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
+Độc lập – Tự do – Hạnh Phúc
+ỦY BAN NHÂN DÂN XÃ LONG HỒ
+Số: 149/KH-UBND, ngày 15 tháng 7 năm 2026
+
+KẾ HOẠCH TẬP HUẤN KỸ NĂNG SỐ CHO NGƯỜI DÂN TRONG ĐỘ TUỔI TRƯỞNG THÀNH VÀ THỰC HIỆN PHONG TRÀO "BÌNH DÂN HỌC VỤ SỐ" TRÊN ĐỊA BÀN XÃ LONG HỒ
+
+I. MỤC ĐÍCH, YÊU CẦU:
+- Trang bị kiến thức cơ bản và kỹ năng ứng dụng về chuyển đổi số giúp người dân kết nối, tương tác và phát triển kỹ năng số để sử dụng các nền tảng, dịch vụ số thiết yếu.
+- Phấn đấu 100% người dân trưởng thành có tri thức cơ bản về chuyển đổi số, sử dụng tốt thiết bị thông minh; trên 85% người dân trong độ tuổi trưởng thành được xác nhận đạt chuẩn phổ cập kỹ năng số trên nền tảng VNeID; 85% người lao động trong HTX có kỹ năng số.
+
+II. NỘI DUNG VÀ TỔ CHỨC:
+- Thời gian: Tổ chức lớp từ ngày 16/7/2026 đến 24/7/2026 trên địa bàn tất cả các ấp của xã Long Hồ.
+- Địa điểm: Trụ sở Nhà sinh hoạt văn hóa các ấp.
+- Hình thức: Tập huấn trực tiếp "Cầm tay chỉ việc", hỗ trợ đặc biệt nhóm người cao tuổi và nhóm yếu thế.
+
+PHẦN HƯỚNG DẪN THỰC HÀNH NỀN TẢNG BÌNH DÂN HỌC VỤ SỐ:
+1. Đăng nhập hệ thống qua VNeID:
+- Cách 1: Điền số định danh cá nhân (CCCD) và mật khẩu -> Nhận mã code xác nhận trên ứng dụng VNeID -> Nhập mã passcode xác nhận chia sẻ.
+- Cách 2: Mở ứng dụng VNeID trên điện thoại, chọn biểu tượng Quét mã QR trên màn hình máy tính -> Bấm xác nhận đăng nhập thành công.
+2. Cập nhật thông tin học viên:
+- Khai báo email liên lạc và kiểm tra chính xác "Họ tên đầy đủ" để hệ thống tự động xuất Chứng nhận điện tử sau khi hoàn thành.
+3. Học tập theo Module bài giảng:
+- Truy cập khóa học "Nâng cao nhận thức Chuyển đổi số hỗ trợ triển khai Đề án 06".
+- Nghiên cứu tài liệu đọc trước (PDF/Slide), sau đó xem video bài giảng theo lộ trình từng bài. Trả lời các câu hỏi kiểm soát lồng ghép trong video để mở khóa bài tiếp theo.
+4. Làm bài kiểm tra đánh giá cuối khóa:
+- Bài kiểm tra trắc nghiệm tổng hợp gồm 20 câu hỏi tính giờ trong 30 phút. Học viên đạt yêu cầu sẽ được cấp Chứng nhận hoàn thành khóa học của Bộ Công An.`,
+    keyTakeaways: [
+      'Mục tiêu phổ cập kỹ năng số cho 100% công dân trưởng thành và trên 85% đạt chuẩn VNeID.',
+      'Tập huấn trực tiếp luân phiên tại trụ sở các ấp từ ngày 16/7 đến 24/7/2026.',
+      'Quy trình đăng nhập Nền tảng Bình dân học vụ số bằng VNeID và làm bài kiểm tra trắc nghiệm 20 câu lấy chứng nhận.'
+    ],
+    fileFormat: 'PDF',
+    fileSize: '5.8 MB',
+    pageCount: 11,
+    downloadCount: 624,
+    views: 2450,
+    isPinned: true,
+    targetAudience: 'Toàn thể người dân trong độ tuổi trưởng thành, đoàn viên thanh niên và người lao động tại 13 ấp',
+    fileName: 'Ke-Hoach-149-Binh-Dan-Hoc-Vu-So-Xa-Long-Ho.pdf',
+    isOfficialApproved: true,
+  },
+  {
+    id: 'doc-kh-ngay-thu-bay-vi-dan',
+    title: 'Kế hoạch số 01/KH-TTPVHCC: Thực hiện Mô hình Ngày Thứ Bảy "Vì Dân Phục Vụ" – Dịch Vụ Công Đến Mọi Nhà',
+    codeNumber: '01/KH-TTPVHCC',
+    category: 'phap_luat',
+    categoryLabel: 'Chính sách & Pháp luật',
+    issuer: 'Trung tâm Phục vụ Hành chính công Xã Long Hồ',
+    author: 'KT. Giám đốc - Phó Giám đốc Trần Thị Thanh Nghĩa',
+    publishDate: '2026-08-12',
+    summary: 'Mô hình đột phá vì dân của Xã Long Hồ: Bắt đầu từ ngày 05/9/2026, định kỳ sáng thứ Bảy hàng tuần (07h30 - 11h00), tổ công tác lưu động xuống trực tiếp trụ sở các ấp để tiếp nhận, giải quyết TTHC (hộ tịch, khai sinh, kết hôn, chứng thực, đất đai, bảo trợ xã hội) và hướng dẫn sử dụng Smart Vĩnh Long, VNeID giúp bà con không phải đi lại xa.',
+    content: `TRUNG TÂM PHỤC VỤ HÀNH CHÍNH CÔNG XÃ LONG HỒ
+Số: 01/KH-TTPVHCC, ngày 12 tháng 8 năm 2026
+
+KẾ HOẠCH THỰC HIỆN MÔ HÌNH NGÀY THỨ BẢY “VÌ DÂN PHỤC VỤ” - DỊCH VỤ CÔNG ĐẾN MỌI NHÀ TRÊN ĐỊA BÀN XÃ LONG HỒ
+
+I. MỤC ĐÍCH, YÊU CẦU:
+1. Đổi mới phương thức phục vụ, chuyển từ trạng thái “chờ người dân đến cơ quan thực hiện TTHC” sang chủ động đi đến gần dân, hướng dẫn và phục vụ dân tại địa bàn.
+2. Thúc đẩy chuyển đổi số cộng đồng, trực tiếp cầm tay chỉ việc, hướng dẫn người dân nộp hồ sơ trực tuyến, thanh toán trực tuyến và sử dụng các ứng dụng số (VNeID, Sổ sức khoẻ điện tử, Smart Vĩnh Long...).
+3. Hỗ trợ đối tượng đặc thù: Người cao tuổi, người khuyết tật, người lao động bận rộn trong tuần không có điều kiện đến trụ sở UBND xã vào giờ hành chính.
+
+II. NỘI DUNG, THỜI GIAN VÀ ĐỊA ĐIỂM:
+1. Nội dung thực hiện:
+- Tiếp nhận và giải quyết TTHC lưu động: Các thủ tục thiết yếu như khai sinh, khai tử, kết hôn, xác nhận tình trạng hôn nhân, chứng thực chữ ký/bản sao, bảo trợ xã hội, biến động đất đai thông thường...
+- Hướng dẫn thực hiện trực tuyến toàn trình, nộp lệ phí không dùng tiền mặt qua VietQR.
+- Tuyên truyền cảnh giác phòng chống tội phạm lừa đảo trên không gian mạng.
+2. Thời gian: Từ ngày 05/9/2026, tần suất định kỳ vào sáng thứ Bảy hàng tuần (từ 07 giờ 30 phút đến 11 giờ 00 phút). Luân phiên mỗi tuần thực hiện tại 01 trụ sở ấp trên địa bàn xã theo lịch cụ thể từng tháng.
+3. Địa điểm: Tại Trụ sở Nhà sinh hoạt văn hóa các ấp.
+
+III. LỢI ÍCH CỦA MÔ HÌNH:
+- Tiết kiệm chi phí, thời gian di chuyển cho nhân dân.
+- Xóa bỏ rào cản công nghệ cho các cô chú lớn tuổi không rành sử dụng điện thoại thông minh.
+- Nâng cao chỉ số cải cách hành chính (PAR INDEX) và chỉ số hài lòng của người dân (SIPAS) đối với chính quyền xã Long Hồ.`,
+    keyTakeaways: [
+      'Giải quyết TTHC lưu động ngay tại ấp vào sáng thứ Bảy (07:30 - 11:00) từ ngày 05/9/2026.',
+      'Cầm tay chỉ việc cài đặt VNeID, nộp hồ sơ dịch vụ công trực tuyến và thanh toán không dùng tiền mặt.',
+      'Hỗ trợ đặc biệt người cao tuổi, người khuyết tật và lao động bận rộn trong tuần.'
+    ],
+    fileFormat: 'PDF',
+    fileSize: '2.6 MB',
+    pageCount: 4,
+    downloadCount: 412,
+    views: 1650,
+    isPinned: true,
+    targetAudience: 'Toàn thể nhân dân, người cao tuổi, người khuyết tật và hộ kinh doanh tại 13 ấp',
+    fileName: 'Ke-Hoach-01-Ngay-Thu-Bay-Vi-Dan-Phuc-Vu-Long-Ho.pdf',
+    isOfficialApproved: true,
+  },
+  {
+    id: 'doc-livestream-chuyen-nghiep',
+    title: 'Chuyên đề: Quản trị và Phát triển Livestream Chuyên nghiệp',
+    codeNumber: 'CĐ-02/LIVESTREAM-LH',
+    category: 'nghe_nong_thon',
+    categoryLabel: 'Nghề nông thôn & Khởi nghiệp',
+    issuer: 'Ban Chỉ đạo Chuyển đổi số & Trung tâm HTCĐ Xã Long Hồ',
+    author: 'Chuyên gia Đào tạo Kinh tế số & Thương mại điện tử',
+    publishDate: '2026-08-10',
+    summary: 'Tài liệu đào tạo toàn diện kỹ năng bán hàng qua Livestream cho các nhà vườn, chủ cơ sở sản xuất và thanh niên xã Long Hồ: 4 trụ cột (Tư duy - Kỹ thuật - Cảm xúc - Giọng nói), cấu trúc kịch bản 5 phần, setup thiết bị ánh sáng - âm thanh, chỉ số GPM và bài tập thực hành ứng phó sự cố.',
+    content: `CHUYÊN ĐỀ: QUẢN TRỊ VÀ PHÁT TRIỂN LIVESTREAM CHUYÊN NGHIỆP
+
+1. TỔNG QUAN VÀ VAI TRÒ QUẢN TRỊ LIVESTREAM:
+- Livestream hiện nay là một ngành nghề kinh doanh số đòi hỏi kỹ năng chuyên nghiệp.
+- 4 trụ cột cốt lõi: Tư duy kinh doanh - Kỹ thuật thiết bị - Kiểm soát cảm xúc - Nghệ thuật giọng nói.
+- Quản trị livestream là kiểm soát toàn bộ quá trình chuẩn bị, vận hành và tối ưu hóa thời gian thực (nơi không có cơ hội làm lại).
+
+2. XÂY DỰNG THƯƠNG HIỆU CÁ NHÂN (NGƯỜI BÁN CHÍNH LÀ THƯƠNG HIỆU):
+- 3 nguyên tắc bắt buộc:
+  + Nhất quán: Giữ phong cách giao tiếp, giọng nói ổn định để định vị trong tâm trí khách hàng.
+  + Là chính mình: Không gồng hình ảnh, không diễn giả tạo, tạo sự gần gũi chân thật của người miền Tây.
+  + Có ranh giới phát ngôn: Nắm rõ các điều cấm của pháp luật, bảo vệ uy tín lâu dài.
+
+3. QUẢN TRỊ NỘI DUNG VÀ KỊCH BẢN PHIÊN LIVE:
+- Cấu trúc kịch bản chuẩn 5 phần:
+  1. Mở đầu (Hook): Thu hút sự chú ý trong 3-5 giây đầu tiên.
+  2. Giá trị chia sẻ: Cung cấp kiến thức hoặc giải pháp cho vấn đề khách hàng gặp phải.
+  3. Trình bày sản phẩm: Đặc điểm, công dụng, nguồn gốc xuất xứ rõ ràng.
+  4. CTA tương tác: Kêu gọi bình luận, đặt câu hỏi, tung ưu đãi giảm giá hoặc quà tặng.
+  5. Kết thúc & Chốt đơn: Tạo sự khẩn trương, cảm ơn và hướng dẫn thanh toán.
+- Luôn chuẩn bị nội dung dự phòng khi lượng tương tác giảm đột ngột để tránh "chết live".
+
+4. QUẢN TRỊ KỸ THUẬT:
+- Camera nét, mic cài áo lọc tạp âm tốt, ánh sáng bố trí đa hướng không bóng gắt, bối cảnh phòng gọn gàng.
+- Đường truyền mạng: Ưu tiên cắm cáp mạng LAN, tốc độ upload đạt từ 10 - 20 Mbps, kiểm thử kết nối trước khi phát sóng.
+
+5. PHÂN TÍCH ĐÁNH GIÁ SỐ LIỆU:
+- Công thức đo lường: GPM = CTR (Tỷ lệ nhấp) * CTO (Tỷ lệ chuyển đổi) * AOV (Giá trị trung bình đơn hàng).
+- Kế hoạch tài chính: Kiểm soát chi phí địa điểm, thiết bị, KOL, quà tặng và phí sàn.
+
+6. BÀI TẬP TÌNH HUỐNG THỰC TẾ:
+- Tình huống 1: Lập kịch bản livestream ra mắt dòng sản phẩm làm đẹp / nông sản sạch.
+- Tình huống 2: Phản hồi bình luận chê bai tiêu cực một cách văn minh, trung lập, đúng luật và giữ vững nhịp độ phiên live.`,
+    keyTakeaways: [
+      'Nắm vững 4 trụ cột: Tư duy - Kỹ thuật - Cảm xúc - Giọng nói trong bán hàng qua livestream.',
+      'Quy trình xây dựng kịch bản 5 phần chuyên nghiệp và kịch bản dự phòng chống "chết live".',
+      'Công thức tối ưu doanh số GPM và kỹ năng xử lý bình luận tiêu cực an toàn pháp lý.'
+    ],
+    fileFormat: 'PDF',
+    fileSize: '6.5 MB',
+    pageCount: 26,
+    downloadCount: 340,
+    views: 1290,
+    isPinned: false,
+    targetAudience: 'Nhà vườn kinh doanh trái cây, cơ sở sản xuất thủ công, tiểu thương và thanh niên khởi nghiệp',
+    fileName: 'Chuyen-De-Quan-Tri-Phat-Trien-Livestream-Chuyen-Nghiep.pdf',
+    isOfficialApproved: true,
+  },
+  {
+    id: 'doc-tmdt-tiktokshop-shopee',
+    title: 'Kỹ năng Xây dựng và Vận hành Gian hàng trên Sàn TMĐT & Mạng Xã hội (Shopee & TikTok Shop)',
+    codeNumber: 'HD-03/TMĐT-TTSHOP',
+    category: 'chuyen_doi_so',
+    categoryLabel: 'Chuyển đổi số & Dịch vụ công',
+    issuer: 'Tổ Công nghệ số Cộng đồng Xã Long Hồ phối hợp Lemon Digital & TikTok Shop Partner',
+    author: 'Lemon Digital & TikTok Shop Partner',
+    publishDate: '2026-08-15',
+    summary: 'Bộ cẩm nang thực chiến hướng dẫn mở gian hàng và bán hàng trên TikTok Shop & Shopee: Quy định pháp luật mới theo Nghị định 117/2025/NĐ-CP và Luật TMĐT 2025; quy trình xác thực định danh; tối ưu trang chi tiết sản phẩm; sáng tạo video ngắn (Unbox, Edutainment, Mix&Match) và quy định vận hành đóng gói đơn hàng.',
+    content: `CẨM NANG VẬN HÀNH GIAN HÀNG SÀN THƯƠNG MẠI ĐIỆN TỬ VÀ TIKTOK SHOP
+
+PHẦN 1: TỔNG QUAN VÀ HÀNH LANG PHÁP LÝ TMĐT NĂM 2026
+- Chính sách thuế theo Nghị định số 117/2025/NĐ-CP: Quy định quản lý thuế đối với hoạt động kinh doanh trên nền tảng số, sàn TMĐT của hộ kinh doanh, cá nhân.
+- Luật Thương mại điện tử năm 2025 (Luật số 122/2025/QH15): Bảo vệ quyền lợi người tiêu dùng, bảo đảm tính xác thực của thông tin sản phẩm và nghĩa vụ tài chính với Nhà nước.
+- Xu hướng Livestream Shopping và Megalive bùng nổ, gắn liền với ứng dụng AI và cá nhân hóa trải nghiệm.
+
+PHẦN 2: QUY TRÌNH KHỞI TẠO VÀ LIÊN KẾT GIAN HÀNG TIKTOK SHOP
+1. Đăng ký trực tuyến bằng tài khoản doanh nghiệp hoặc thẻ CCCD cá nhân chính chủ.
+2. Cài đặt tài khoản ngân hàng, thông tin kho lấy hàng và thiết lập ủy quyền quản lý.
+3. Liên kết tài khoản: 01 gian hàng TikTok Shop được liên kết với 1 tài khoản chính thức (kênh chính) và 4 tài khoản tiếp thị (kênh phụ để bán hàng chéo).
+4. Tối ưu hóa tên và mô tả sản phẩm:
+- Công thức đặt tên chuẩn SEO: [Loại sản phẩm] + [Thương hiệu] + [Mã sản phẩm] + [Đặc tính nổi bật].
+- Bộ hình ảnh tối thiểu 5 ảnh rõ nét, chụp cận cảnh chất liệu, tem nhãn OCOP, bảng quy đổi size/trọng lượng.
+
+PHẦN 3: SÁNG TẠO VIDEO NGẮN THU HÚT TRAFFIC
+- Định dạng video dọc 9:16, độ phân giải 1080p, độ dài vàng từ 15 đến 60 giây.
+- 4 tuyến nội dung hấp dẫn: Unbox & Review (Mở hộp đánh giá), Edutainment (Chia sẻ kiến thức bổ ích), Mix & Match (Gợi ý cách dùng/phối đồ), Life Style (Phong cách sống sinh động).
+- Lưu ý danh mục hàng hóa bị cấm/hạn chế: Hàng giả thương hiệu, sản phẩm giảm cân không phép, thuốc kê đơn, quảng cáo sai sự thật.
+
+PHẦN 4: HƯỚNG DẪN XỬ LÝ ĐƠN HÀNG VÀ CHỈ SỐ VẬN HÀNH
+- Quy trình nhận đơn: Chờ xác nhận -> Chờ lấy hàng -> In phiếu giao nhận (vận đơn) -> Bàn giao cho đơn vị vận chuyển (J&T Express, Giao Hàng Nhanh, Ahamove...).
+- Quản lý tỷ lệ gửi hàng muộn (LDR): Bắt buộc duy trì tỷ lệ giao trễ LDR dưới 4%. Nếu vi phạm sẽ bị phạt điểm tài khoản và giới hạn số đơn/ngày.
+- Quản lý tỷ lệ hủy đơn do người bán (SFCR): Đảm bảo duy trì dưới mức 2.5% tránh bị khóa quyền livestream.`,
+    keyTakeaways: [
+      'Nắm vững chính sách thuế TMĐT theo Nghị định 117/2025/NĐ-CP và Luật TMĐT năm 2025.',
+      'Quy tắc vàng đặt tên sản phẩm chuẩn SEO: Loại sản phẩm + Thương hiệu + Tên/Mã + Đặc tính.',
+      'Duy trì tỷ lệ giao hàng trễ (LDR) dưới 4% và tỷ lệ hủy đơn (SFCR) dưới 2.5% để bảo vệ tài khoản.'
+    ],
+    fileFormat: 'PDF',
+    fileSize: '12.1 MB',
+    pageCount: 38,
+    downloadCount: 520,
+    views: 1980,
+    isPinned: false,
+    targetAudience: 'Chủ thể OCOP, nhà vườn, cơ sở may mặc thủ công, hộ kinh doanh trên địa bàn xã Long Hồ',
+    fileName: 'Ky-Nang-Xay-Dung-Van-Hanh-Gian-Hang-Shopee-TikTokShop.pdf',
+    isOfficialApproved: true,
+  },
+  {
+    id: 'doc-qd-ban-tru-mam-non',
+    title: 'Quyết định số 3122/QĐ-UBND: Phê duyệt Kế hoạch Tổ chức Công tác Bán trú cho Trẻ Trường Mầm non Phú Đức Năm học 2026-2027',
+    codeNumber: '3122/QĐ-UBND',
+    category: 'phap_luat',
+    categoryLabel: 'Chính sách & Pháp luật',
+    issuer: 'Ủy Ban Nhân Dân Xã Long Hồ',
+    author: 'KT. Chủ tịch - Phó Chủ tịch Nguyễn Thị Mỹ Hạnh',
+    publishDate: '2026-09-21',
+    summary: 'Quyết định chính thức của Chủ tịch UBND Xã Long Hồ phê duyệt Kế hoạch tổ chức công tác bán trú cho trẻ tại trường Mầm non Phú Đức năm học 2026-2027 (Kèm Kế hoạch số 215/KH-MNPĐ); giao trách nhiệm Phòng Văn hóa - Xã hội và nhà trường bảo đảm nghiêm ngặt an toàn vệ sinh thực phẩm theo Chỉ thị 33/CT-TTg của Thủ tướng Chính phủ.',
+    content: `ỦY BAN NHÂN DÂN XÃ LONG HỒ
+CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
+Độc lập - Tự do - Hạnh phúc
+Số: 3122/QĐ-UBND, Long Hồ, ngày 21 tháng 9 năm 2026
+
+QUYẾT ĐỊNH
+VỀ VIỆC PHÊ DUYỆT KẾ HOẠCH TỔ CHỨC CÔNG TÁC BÁN TRÚ CHO TRẺ TRƯỜNG MẦM NON PHÚ ĐỨC NĂM HỌC 2026-2027
+
+CHỦ TỊCH ỦY BAN NHÂN DÂN XÃ LONG HỒ
+- Căn cứ Luật Tổ chức chính quyền địa phương ngày 16 tháng 6 năm 2025;
+- Căn cứ Nghị định số 142/2025/NĐ-CP ngày 12 tháng 6 năm 2025 của Chính phủ;
+- Căn cứ Chỉ thị số 33/CT-TTg ngày 14 tháng 8 năm 2026 của Thủ tướng Chính phủ yêu cầu tăng cường bảo đảm an toàn thực phẩm và phòng ngừa ngộ độc thực phẩm trong các cơ sở giáo dục;
+- Căn cứ Nghị quyết số 07/2021/NQ-HĐND ngày 09 tháng 9 năm 2021 của Hội đồng nhân dân tỉnh Vĩnh Long về quy định các khoản thu dịch vụ phục vụ, hỗ trợ hoạt động giáo dục;
+- Theo đề nghị của Trưởng phòng Văn hóa - Xã hội xã Long Hồ tại Tờ trình số 1573/TTr-VHXH ngày 14 tháng 9 năm 2026.
+
+QUYẾT ĐỊNH:
+Điều 1. Phê duyệt Kế hoạch tổ chức công tác bán trú cho trẻ trường Mầm non Phú Đức năm học 2026-2027 (Kèm theo Kế hoạch số 215/KH-MNPĐ ngày 09 tháng 9 năm 2026 của trường Mầm non Phú Đức).
+Điều 2. Trách nhiệm thi hành:
+1. Giao Trưởng phòng Văn hóa - Xã hội xã chủ trì, phối hợp với thủ trưởng các đơn vị có liên quan giám sát việc thực hiện theo các nội dung đã phê duyệt và các quy định pháp luật hiện hành.
+2. Giao Hiệu trưởng trường Mầm non Phú Đức có trách nhiệm tổ chức thực hiện Kế hoạch nghiêm túc, đúng quy định, đúng mục đích và hiệu quả.
+Điều 3. Chánh Văn phòng HĐND và UBND xã, Trưởng phòng Văn hóa - Xã hội, Trưởng phòng Kinh tế xã, Hiệu trưởng trường Mầm non Phú Đức và các đơn vị có liên quan chịu trách nhiệm thi hành Quyết định này.
+
+KT. CHỦ TỊCH
+PHÓ CHỦ TỊCH
+(Đã ký và đóng dấu)
+Nguyễn Thị Mỹ Hạnh`,
+    keyTakeaways: [
+      'Phê duyệt chính thức Kế hoạch bán trú năm học 2026-2027 cho trường Mầm non Phú Đức.',
+      'Siết chặt công tác an toàn vệ sinh thực phẩm bếp ăn bán trú theo Chỉ thị số 33/CT-TTg.',
+      'Giám sát công khai, thu chi đúng quy định theo Nghị quyết 07/2021/NQ-HĐND tỉnh Vĩnh Long.'
+    ],
+    fileFormat: 'PDF',
+    fileSize: '1.5 MB',
+    pageCount: 3,
+    downloadCount: 168,
+    views: 740,
+    isPinned: false,
+    targetAudience: 'Ban giám hiệu các trường mầm non, phụ huynh học sinh và cán bộ văn hóa xã Long Hồ',
+    fileName: 'Quyet-Dinh-3122-QD-UBND-Ban-Tru-Mam-Non-Phu-Duc.pdf',
+    isOfficialApproved: true,
+  },
+  {
+    id: 'doc-kh-dao-tao-nghe-ubnd-longho',
+    title: 'Kế hoạch số 38/KH-UBND (và KH 72/KH-UBND): Hỗ trợ Đào tạo Nghề Trình độ Sơ cấp, Dưới 3 Tháng cho Lao động Nông thôn và Thanh niên Xã Long Hồ Năm 2026 & Giai đoạn 2026 - 2030',
+    codeNumber: '38/KH-UBND',
+    category: 'nghe_nong_thon',
+    categoryLabel: 'Nghề nông thôn & Khởi nghiệp',
+    issuer: 'Ủy Ban Nhân Dân Xã Long Hồ',
+    author: 'TM. UBND Xã - KT. Chủ tịch - Phó Chủ tịch Nguyễn Thị Mỹ Hạnh',
+    publishDate: '2026-03-18',
+    summary: 'Kế hoạch trọng điểm của UBND Xã Long Hồ: Năm 2026 hỗ trợ mở lớp Kỹ thuật chế biến món ăn (35 học viên); Đề án giai đoạn 2026-2030 mở 14 lớp cho 431 lao động (chăm sóc cây sầu riêng, mít xơ đen, ớt sừng vàng, đan thảm lục bình, sinh vật cảnh, chăn nuôi gia súc gia cầm, pha chế đồ uống).',
+    content: `ỦY BAN NHÂN DÂN XÃ LONG HỒ
+Số: 38/KH-UBND (và Kế hoạch 72/KH-UBND)
+
+KẾ HOẠCH HỖ TRỢ ĐÀO TẠO NGHỀ TRÌNH ĐỘ SƠ CẤP, DƯỚI 3 THÁNG CHO LAO ĐỘNG Ở KHU VỰC NÔNG THÔN VÀ THANH NIÊN TRÊN ĐỊA BÀN XÃ LONG HỒ
+
+I. MỤC TIÊU, CHỈ TIÊU:
+- Năm 2026: Đào tạo nghề cho 35 lao động (25 lao động nông thôn + 10 thanh niên hoàn thành nghĩa vụ quân sự/công an). Ngành nghề đào tạo: Kỹ thuật chế biến món ăn.
+- Giai đoạn 2026 - 2030: Dự kiến mở 14 lớp cho 431 người (Lĩnh vực phi nông nghiệp: 269 người; Nông nghiệp: 162 người). Tỷ lệ có việc làm sau đào tạo đạt trên 80%.
+
+LỘ TRÌNH CÁC NĂM TIẾP THEO:
+- Năm 2027 (03 lớp): 01 lớp pha chế (30 người); 01 lớp sinh vật cảnh (36 người); 01 lớp tập huấn chăm sóc mít xơ đen (36 người).
+- Năm 2028 (03 lớp): 01 lớp chăm sóc sắc đẹp (30 người); 01 lớp đan thảm lục bình (30 người); 01 lớp chăm sóc ớt sừng vàng (36 người).
+- Năm 2029 (03 lớp): 01 lớp sinh vật cảnh (18 người); 01 lớp chăn nuôi gia súc, gia cầm (36 người); 01 lớp đan lát (36 người).
+- Năm 2030 (03 lớp): 01 lớp chăn nuôi gia súc gia cầm (36 người); 01 lớp trồng và chăm sóc cây sầu riêng (36 người); 01 lớp trầm nón lá (36 người).
+
+II. CHÍNH SÁCH VÀ NGUỒN LỰC:
+- Người học được miễn phí 100% học phí, được cấp chứng chỉ nghề sơ cấp theo quy định.
+- Hỗ trợ vay vốn giải quyết việc làm qua Ngân hàng Chính sách xã hội huyện Long Hồ.
+- Liên kết hợp tác xã, doanh nghiệp bao tiêu sản phẩm và tư vấn xuất khẩu lao động có thời hạn ở nước ngoài (Nhật Bản, Đài Loan, Hàn Quốc).`,
+    keyTakeaways: [
+      'Năm 2026: Mở lớp Kỹ thuật chế biến món ăn cho 35 lao động nông thôn và thanh niên.',
+      'Chiến lược 2026-2030: Mở 14 lớp nghề cho 431 lao động gắn với cây ăn trái và thủ công mỹ nghệ.',
+      'Học viên được hỗ trợ kết nối vay vốn giải quyết việc làm tại Ngân hàng CSXH.'
+    ],
+    fileFormat: 'PDF',
+    fileSize: '4.5 MB',
+    pageCount: 5,
+    downloadCount: 310,
+    views: 1120,
+    isPinned: false,
+    targetAudience: 'Người lao động nông thôn, bộ đội xuất ngũ, thanh niên tìm việc làm tại xã Long Hồ',
+    fileName: 'Ke-Hoach-38-Dao-Tao-Nghe-Lao-Dong-Nong-Thon-Long-Ho-2026.pdf',
+    isOfficialApproved: true,
+  },
+  {
+    id: 'doc-kh-dao-tao-nghe-gdtx',
+    title: 'Kế hoạch số 24/KH-GDTXVL: Hỗ trợ Đào tạo Nghề Trình độ Sơ cấp, Dưới 3 Tháng cho Lao động Nông thôn, Thanh niên Năm 2026',
+    codeNumber: '24/KH-GDTXVL',
+    category: 'nghe_nong_thon',
+    categoryLabel: 'Nghề nông thôn & Khởi nghiệp',
+    issuer: 'Trung tâm GDTX Vĩnh Long Cơ sở 2 phối hợp UBND Xã Long Hồ',
+    author: 'KT. Giám đốc - Phó Giám đốc Đặng Văn Phúc Tâm',
+    publishDate: '2026-03-16',
+    summary: 'Văn bản phối hợp giữa Trung tâm GDTX tỉnh Vĩnh Long (Cơ sở 2) và UBND Xã Long Hồ: Tổng dự toán kinh phí 368 triệu đồng tổ chức các lớp nghề miễn phí cho 90 học viên (Chế biến món ăn, Tiểu thủ công nghiệp, Sinh vật cảnh) và hỗ trợ tiền ăn, tiền đi lại cho học viên.',
+    content: `SỞ GD&ĐT TỈNH VĨNH LONG
+TRUNG TÂM GDTX VĨNH LONG CƠ SỞ 2
+Số: 24/KH-GDTXVL, ngày 16 tháng 3 năm 2026
+
+KẾ HOẠCH HỖ TRỢ ĐÀO TẠO NGHỀ TRÌNH ĐỘ SƠ CẤP, ĐÀO TẠO DƯỚI 3 THÁNG CHO NGƯỜI LAO ĐỘNG Ở KHU VỰC NÔNG THÔN, THANH NIÊN NĂM 2026
+
+Căn cứ Nghị định 338/2025/NĐ-CP của Chính phủ; Quyết định số 3267/QĐ-UBND của UBND tỉnh Vĩnh Long;
+Trung tâm GDTX Vĩnh Long Cơ sở 2 phối hợp với Ủy ban Nhân dân xã Long Hồ xây dựng Kế hoạch đào tạo nghề năm 2026:
+
+1. CHỈ TIÊU ĐÀO TẠO:
+Dự kiến chỉ tiêu: 90 người. Trong đó:
+- Lĩnh vực phi nông nghiệp (60 người):
+  + Nghề Kỹ thuật chế biến món ăn: 30 người (Thời lượng: 150 giờ).
+  + Nghề Tiểu thủ công nghiệp: 30 người (Thời lượng: 100 giờ).
+- Lĩnh vực nông nghiệp (30 người):
+  + Nghề Sinh vật cảnh: 30 người (Thời lượng: 150 giờ).
+
+2. TỔNG DỰ TOÁN KINH PHÍ: 368.000.000 ĐỒNG
+- Nguồn kinh phí Trung ương: 204.700.000 đồng.
+- Nguồn kinh phí địa phương: 163.300.000 đồng.
+- Bao gồm: Chi phí tổ chức đào tạo, nguyên vật liệu thực hành, hỗ trợ tiền ăn và hỗ trợ tiền đi lại cho các đối tượng chính sách theo quy định.
+
+3. HÌNH THỨC VÀ TIÊU CHUẨN:
+- Đào tạo tập trung hoặc lưu động tại cơ sở các ấp; đảm bảo tối thiểu 70% thời lượng thực hành cầm tay chỉ việc.
+- Cấp Chứng chỉ sơ cấp nghề hoặc Chứng chỉ đào tạo nghề theo quy định của Bộ Lao động - TB&XH.`,
+    keyTakeaways: [
+      'Tổng kinh phí đào tạo 368 triệu đồng từ ngân sách Nhà nước phục vụ miễn phí nhân dân.',
+      'Quy mô 90 học viên chia làm 3 lớp: Nấu ăn (150h), Tiểu thủ công nghiệp (100h), Sinh vật cảnh (150h).',
+      'Đảm bảo 70% thời lượng thực hành thực tế và cấp chứng chỉ nghề chính quy.'
+    ],
+    fileFormat: 'PDF',
+    fileSize: '3.2 MB',
+    pageCount: 6,
+    downloadCount: 228,
+    views: 890,
+    isPinned: false,
+    targetAudience: 'Người lao động nông nhàn, thanh niên có nhu cầu học nghề ngắn hạn tại xã Long Hồ',
+    fileName: 'Ke-Hoach-24-GDTX-Vinh-Long-Dao-Tao-Nghe-2026.pdf',
+    isOfficialApproved: true,
+  },
+  {
+    id: 'doc-giay-moi-tap-huan-lua',
+    title: 'Giấy mời số 08-GM/HNDX: Tham dự Tập huấn Kỹ thuật Trồng Lúa Thích ứng Biến đổi Khí hậu & Chanh Dây Ngọt',
+    codeNumber: '08-GM/HNDX',
+    category: 'nong_nghiep',
+    categoryLabel: 'Nông nghiệp & Khuyến nông',
+    issuer: 'Ban Chấp hành Hội Nông Dân Xã Long Hồ',
+    author: 'T/M Ban Chấp hành - Chủ tịch Phạm Thanh Hiền',
+    publishDate: '2026-07-05',
+    summary: 'Giấy mời chính thức của Ban Chấp hành Hội Nông dân Xã Long Hồ mời hội viên nông dân ấp An Thành, An Hiệp tham dự buổi chuyển giao khoa học kỹ thuật trồng lúa ứng phó xâm nhập mặn, biến đổi khí hậu và kỹ thuật thâm canh chanh dây ngọt nâng cao thu nhập.',
+    content: `HỘI NÔNG DÂN VIỆT NAM
+HỘI NÔNG DÂN TỈNH VĨNH LONG
+BCH HỘI NÔNG DÂN XÃ LONG HỒ
+Số: 08-GM/HNDX, Long Hồ, ngày 5 tháng 7 năm 2026
+
+GIẤY MỜI
+THAM DỰ TẬP HUẤN KỸ THUẬT TRỒNG LÚA BIẾN ĐỔI KHÍ HẬU VÀ CHANH DÂY NGỌT
+
+Nhằm giúp cho Hội viên nông dân am hiểu kỹ thuật trồng chanh dây ngọt và canh tác lúa thích ứng với biến đổi khí hậu, hạn mặn, nâng cao thu nhập cho gia đình.
+Ban Chấp hành Hội Nông dân xã Long Hồ trân trọng kính mời:
+- Kính mời: Ông (bà) Nguyễn Văn Sang (ấp An Thành, xã Long Hồ) và Ông (bà) Nguyễn Văn Năm (ấp An Hiệp, xã Long Hồ) cùng toàn thể bà con hội viên nông dân.
+- Thời gian: 01 buổi, vào lúc 8 giờ 00 phút ngày 09 tháng 7 năm 2026 (Thứ Năm).
+- Địa điểm: Nhà ông Nguyễn Văn Năm - Chi hội trưởng Nông dân ấp An Hiệp, xã Long Hồ, tỉnh Vĩnh Long.
+
+Kính mong quý bà con nông dân tham dự đúng thời gian và địa điểm nêu trên để buổi tập huấn chuyển giao kỹ thuật đạt kết quả tốt nhất.
+
+T/M BAN CHẤP HÀNH
+CHỦ TỊCH
+(Đã ký và đóng dấu)
+Phạm Thanh Hiền`,
+    keyTakeaways: [
+      'Thời gian: 8h00 sáng Thứ Năm ngày 09/7/2026.',
+      'Địa điểm: Nhà ông Nguyễn Văn Năm - Chi hội trưởng Nông dân ấp An Hiệp.',
+      'Nội dung: Chuyển giao kỹ thuật canh tác lúa ứng phó hạn mặn và trồng chanh dây ngọt.'
+    ],
+    fileFormat: 'PDF',
+    fileSize: '850 KB',
+    pageCount: 2,
+    downloadCount: 145,
+    views: 620,
+    isPinned: false,
+    targetAudience: 'Hội viên nông dân các ấp An Hiệp, An Thành và các ấp lân cận xã Long Hồ',
+    fileName: 'Giay-Moi-08-Tap-Huan-Ky-Thuat-Lua-Bien-Doi-Khi-Hau.pdf',
+    isOfficialApproved: true,
+  },
+  {
+    id: 'doc-kh-hat-sac-bua-phu-le',
+    title: 'Kế hoạch số 189/KH-UBND: Tổ chức Lớp Truyền dạy, Hướng dẫn Thực hành Diễn xướng Dân gian "Hát Sắc Bùa Phú Lễ" – Di sản Văn hóa Phi vật thể Quốc gia',
+    codeNumber: '189/KH-UBND',
+    category: 'giao_duc_khac',
+    categoryLabel: 'Giáo dục thường xuyên & Khác',
+    issuer: 'Ủy Ban Nhân Dân Xã Long Hồ',
+    author: 'TM. UBND Xã - KT. Chủ tịch - Phó Chủ tịch Nguyễn Thị Mỹ Hạnh',
+    publishDate: '2026-08-17',
+    summary: 'Kế hoạch tổ chức lớp truyền dạy di sản văn hóa phi vật thể "Hát sắc bùa Phú Lễ" thuộc Tiêu chí số 06 Chương trình MTQG Xây dựng Nông thôn mới nâng cao năm 2026. Lớp học diễn ra từ 24/8 đến 27/8/2026 tại Trung tâm VHTT xã Long Hồ dành cho 50 học viên từ các trường học, đoàn thể và CLB đờn ca tài tử.',
+    content: `ỦY BAN NHÂN DÂN XÃ LONG HỒ
+Số: 189/KH-UBND, ngày 17 tháng 8 năm 2026
+
+KẾ HOẠCH TỔ CHỨC LỚP TRUYỀN DẠY, HƯỚNG DẪN THỰC HÀNH DIỄN XƯỚNG DÂN GIAN "HÁT SẮC BÙA PHÚ LỄ" - DI SẢN VĂN HÓA PHI VẬT THỂ QUỐC GIA (THUỘC TIÊU CHÍ SỐ 06 NÔNG THÔN MỚI NÂNG CAO NĂM 2026)
+
+I. MỤC ĐÍCH, YÊU CẦU:
+- Bảo tồn, gìn giữ và phát huy giá trị di sản văn hóa phi vật thể quốc gia "Hát sắc bùa Phú Lễ" trong đời sống cộng đồng.
+- Tạo nguồn lực nòng cốt kế thừa có khả năng tổ chức, biểu diễn và truyền dạy lại tại các trường học và câu lạc bộ nghệ thuật địa phương.
+
+II. NỘI DUNG VÀ THỜI GIAN:
+1. Nội dung truyền dạy:
+- Giới thiệu nguồn gốc, ý nghĩa văn hóa của Hát sắc bùa Phú Lễ.
+- Hướng dẫn kỹ thuật hát, cách thức diễn xướng, tổ chức đội hình, sử dụng nhạc cụ, đạo cụ truyền thống (trống cơm, sanh sứa...).
+- Thực hành biểu diễn theo nhóm, xử lý tình huống sân khấu thực tế.
+2. Đối tượng và số lượng:
+- Dự kiến 50 học viên gồm: Cán bộ văn hóa xã, giáo viên dạy thanh nhạc, tổng phụ trách Đội của 13 trường học, thành viên các CLB Đờn ca tài tử (15 người) và đoàn viên thanh niên (10 người).
+3. Thời gian và địa điểm:
+- Thời gian: Từ ngày 24/8/2026 đến ngày 27/8/2026 (04 ngày). Khai giảng lúc 08h00 ngày 24/8; Bế giảng lúc 16h00 ngày 27/8/2026.
+- Địa điểm: Trung tâm Văn hóa Thể thao Xã Long Hồ (Trụ sở Trung tâm Văn hóa xã Phú Đức cũ).
+4. Giảng viên hướng dẫn: Nghệ nhân dân gian, diễn giả có uy tín và am hiểu sâu sắc về nghệ thuật diễn xướng dân gian trực tiếp truyền dạy. Kết thúc khóa học, học viên được cấp Giấy chứng nhận hoàn thành lớp truyền dạy.`,
+    keyTakeaways: [
+      'Thời gian học: 4 ngày (từ 24/8/2026 đến 27/8/2026) tại Trung tâm VHTT xã Long Hồ.',
+      'Đối tượng: 50 học viên từ các trường học, CLB đờn ca tài tử và đoàn viên thanh niên.',
+      'Cấp Giấy chứng nhận hoàn thành khóa đào tạo di sản văn hóa phi vật thể quốc gia.'
+    ],
+    fileFormat: 'PDF',
+    fileSize: '3.1 MB',
+    pageCount: 4,
+    downloadCount: 198,
+    views: 820,
+    isPinned: false,
+    targetAudience: 'Giáo viên âm nhạc, cán bộ văn hóa, thành viên CLB đờn ca tài tử và thanh niên xã Long Hồ',
+    fileName: 'Ke-Hoach-189-Lop-Truyen-Day-Hat-Sac-Bua-Phu-Le.pdf',
+    isOfficialApproved: true,
+  },
+
+  // --- CÁC TÀI LIỆU KHO NÔNG NGHIỆP & PHÁP LUẬT NỀN TẢNG ---
   {
     id: 'doc-001',
     title: 'Sổ tay Kỹ thuật Trồng & Chăm sóc Bưởi Da Xanh Đạt Chuẩn VietGAP',
@@ -43,45 +605,9 @@ CHƯƠNG III: QUẢN LÝ DỊCH HẠI THEO PHƯƠNG PHÁP IPM
     pageCount: 36,
     downloadCount: 342,
     views: 1280,
-    isPinned: true,
+    isPinned: false,
     targetAudience: 'Hội viên nông dân, nhà vườn trồng cây ăn trái trên địa bàn xã Long Hồ',
     fileName: 'So-Tay-Ky-Thuat-Buoi-Da-Xanh-VietGAP-LongHo.pdf',
-    isOfficialApproved: true,
-  },
-  {
-    id: 'doc-002',
-    title: 'Cẩm nang Hướng dẫn Sử dụng Ứng dụng VNeID & Dịch vụ Công Trực tuyến Mức độ Toàn trình',
-    codeNumber: 'HD-04/CĐS-LH2026',
-    category: 'chuyen_doi_so',
-    categoryLabel: 'Chuyển đổi số & Dịch vụ công',
-    issuer: 'Tổ Công nghệ Số Cộng đồng Xã Long Hồ',
-    author: 'Tổ Biên soạn CĐS Xã',
-    publishDate: '2026-02-28',
-    summary: 'Hướng dẫn từng bước bằng hình ảnh minh họa cách kích hoạt tài khoản định danh điện tử Mức 2, nộp hồ sơ xin cấp đổi giấy tờ hộ tịch, đăng ký lưu trú và tích hợp bảo hiểm y tế trên điện thoại thông minh.',
-    content: `MỤC I: KÍCH HOẠT VÀ BẢO MẬT TÀI KHOẢN VNeID CẤP 2
-1. Đến trực tiếp Công an Xã Long Hồ hoặc Bộ phận Một cửa để chụp ảnh và lăn vân tay cấp mức 2.
-2. Thiết lập mật khẩu mạnh và mã passcode 6 số bảo mật. Tuyệt đối không cung cấp mã OTP cho bất kỳ ai xưng danh công an gọi điện thoại.
-
-MỤC II: THỰC HIỆN CÁC THỦ TỤC DỊCH VỤ CÔNG TRỰC TUYẾN PHỔ BIẾN
-1. Thủ tục xác nhận tình trạng hôn nhân, đăng ký khai sinh, khai tử.
-2. Đăng ký tạm trú, thông báo lưu trú khi người thân ở lại nhà.
-3. Xuất trình thẻ Căn cước và Thẻ BHYT số khi đi khám chữa bệnh tại Trạm Y tế Xã Long Hồ hoặc Trung tâm Y tế huyện mà không cần mang thẻ giấy.
-
-MỤC III: THANH TOÁN KHÔNG DÙNG TIỀN MẶT TIỀN ĐIỆN, NƯỚC VÀ HỌC PHÍ
-- Quét mã VietQR trên hóa đơn hàng tháng nhanh chóng qua ứng dụng ngân hàng số hoặc ví viễn thông Viettel Money.`,
-    keyTakeaways: [
-      'Đi khám bệnh tại Trạm Y tế chỉ cần quét mã QR trên ứng dụng VNeID.',
-      'Nộp hồ sơ trực tuyến tại nhà tiết kiệm thời gian đi lại cho bà con các ấp.',
-      'Cảnh giác phòng ngừa thủ đoạn lừa đảo công nghệ cao qua điện thoại.'
-    ],
-    fileFormat: 'PDF',
-    fileSize: '6.8 MB',
-    pageCount: 28,
-    downloadCount: 512,
-    views: 2190,
-    isPinned: true,
-    targetAudience: 'Toàn thể nhân dân, cán bộ công chức và đoàn viên thanh niên xã',
-    fileName: 'Cam-Nang-VNeID-Dich-Vu-Cong-Xa-Long-Ho.pdf',
     isOfficialApproved: true,
   },
   {
@@ -227,300 +753,231 @@ BÀI 3: LIÊN KẾT ĐẦU RA SẢN PHẨM VỚI HỢP TÁC XÃ
     targetAudience: 'Bà con nông dân làm vườn và canh tác lúa - hoa màu',
     fileName: 'Huong-Dan-U-Phan-Huu-Co-Vi-Sinh.pdf',
     isOfficialApproved: true,
-  },
-  {
-    id: 'doc-007',
-    title: 'Kế hoạch Hoạt động & Quy chế Vận hành Trung tâm Học tập Cộng đồng Năm 2026',
-    codeNumber: 'KH-01/QĐ-UBND-LH',
-    category: 'giao_duc_khac',
-    categoryLabel: 'Giáo dục thường xuyên & Khác',
-    issuer: 'UBND Xã Long Hồ',
-    author: 'Ban Giám Đốc TT HTCĐ',
-    publishDate: '2026-01-10',
-    summary: 'Văn bản quy định chức năng, nhiệm vụ, cơ cấu tổ chức và chỉ tiêu mở các lớp học bồi dưỡng kiến thức, kỹ năng nghề, nâng cao chất lượng đời sống văn hóa cho nhân dân xã Long Hồ năm 2026.',
-    content: `ĐIỀU 1: MỤC TIÊU TỔNG QUÁT NĂM 2026
-1. Duy trì 100% ấp có điểm học tập vệ tinh tại Nhà sinh hoạt văn hóa cộng đồng.
-2. Mở tối thiểu 24 chuyên đề tập huấn nông nghiệp, chuyển đổi số và nâng cao đời sống dân trí.
-3. 85% người trưởng thành trên địa bàn biết sử dụng điện thoại thông minh tra cứu kiến thức và làm thủ tục hành chính công.
-
-ĐIỀU 2: CÁC NGUỒN LỰC VÀ ĐIỀU KIỆN CƠ SỞ VẬT CHẤT
-- Phòng máy vi tính trung tâm: 20 máy tính kết nối cáp quang internet phục vụ miễn phí.
-- Hội trường đa năng 150 chỗ ngồi trang bị máy chiếu, âm thanh hội nghị.
-- Tủ sách pháp luật và nông nghiệp với hơn 1.200 đầu sách giấy và kho tài liệu số trên website.`,
-    keyTakeaways: [
-      'Tất cả các lớp học tại trung tâm đều hoàn toàn miễn phí cho người dân.',
-      'Cấp giấy chứng nhận tham gia cho học viên hoàn thành các khóa bồi dưỡng nghề.',
-      'Phát huy vai trò của dòng họ học tập và gia đình hiếu học.'
-    ],
-    fileFormat: 'PDF',
-    fileSize: '2.4 MB',
-    pageCount: 14,
-    downloadCount: 145,
-    views: 680,
-    isPinned: false,
-    targetAudience: 'Cán bộ ban ngành đoàn thể, ban giám hiệu các trường và nhân dân',
-    fileName: 'Ke-Hoach-Hoat-Dong-TTHTCD-LongHo-2026.pdf',
-    isOfficialApproved: true,
   }
 ];
 
 export const INITIAL_ANNOUNCEMENTS: AnnouncementItem[] = [
   {
-    id: 'ann-001',
-    title: 'Chiêu sinh Khóa Đào tạo "Kỹ năng Số & Bán hàng Nông sản Trực tuyến" Khóa I/2026',
-    codeNumber: 'TB-08/TB-HTCĐ',
-    publishDate: '2026-03-24',
+    id: 'ann-thu-bay-vi-dan',
+    title: 'Thông báo: Triển khai Mô hình Ngày Thứ Bảy "Vì Dân Phục Vụ" – Tiếp nhận TTHC & Dịch vụ công Lưu động tại 13 Ấp',
+    codeNumber: 'TB-01/TTPVHCC-LH',
+    publishDate: '2026-08-25',
     priority: 'urgent',
+    type: 'hoat_dong_chung',
+    typeLabel: 'Hoạt động công quyền vì dân',
+    issuer: 'Trung tâm Phục vụ Hành chính công Xã Long Hồ',
+    summary: 'Từ 05/9/2026, Trung tâm Phục vụ Hành chính công xã tổ chức tiếp nhận và trả kết quả TTHC lưu động vào sáng thứ Bảy hàng tuần tại trụ sở các ấp, hỗ trợ bà con làm thủ tục hộ tịch, chứng thực, đất đai và cài đặt VNeID, Smart Vĩnh Long.',
+    content: `Thực hiện Kế hoạch số 01/KH-TTPVHCC ngày 12/8/2026 của Trung tâm Phục vụ Hành chính công xã Long Hồ;
+Kính thông báo đến toàn thể nhân dân 13 ấp trên địa bàn xã:
+
+1. Thời gian: Định kỳ sáng thứ Bảy hàng tuần từ 07h30 đến 11h00 (bắt đầu từ ngày 05/9/2026).
+2. Địa điểm: Luân phiên tại Nhà sinh hoạt văn hóa của từng ấp.
+3. Nội dung phục vụ:
+- Tiếp nhận và giải quyết trực tiếp các thủ tục hành chính: Khai sinh, khai tử, kết hôn, xác nhận tình trạng hôn nhân, chứng thực bản sao, hồ sơ bảo trợ xã hội, biến động đất đai.
+- Cầm tay chỉ việc hướng dẫn người dân nộp hồ sơ trực tuyến, thanh toán trực tuyến không dùng tiền mặt.
+- Hỗ trợ cài đặt và kích hoạt VNeID mức 2, ứng dụng Smart Vĩnh Long.
+Trân trọng thông báo bà con sắp xếp thời gian đến liên hệ giải quyết thủ tục.`,
+    isPinned: true,
+    relatedDocumentId: 'doc-kh-ngay-thu-bay-vi-dan',
+  },
+  {
+    id: 'ann-lop-ai-mobifone',
+    title: 'Thông báo Chiêu sinh Lớp Tập huấn: "Ứng dụng AI Thực hành trong Công việc Hành chính & Nâng cao Năng suất" Năm 2026',
+    codeNumber: 'TB-12/CĐS-LH',
+    publishDate: '2026-07-22',
+    priority: 'important',
     type: 'chieu_sinh',
     typeLabel: 'Chiêu sinh lớp học',
-    issuer: 'Ban Giám Đốc TT HTCĐ Xã Long Hồ',
-    summary: 'Thông báo mở lớp đào tạo miễn phí kỹ năng chụp ảnh sản phẩm bưởi, cam sành, sầu riêng và lập gian hàng bán lẻ trên TikTok Shop, Zalo Mini App dành cho thanh niên và nhà vườn.',
-    content: `Căn cứ kế hoạch hoạt động chuyển đổi số năm 2026 của UBND Xã Long Hồ;
-Trung tâm Học tập Cộng đồng trân trọng thông báo chiêu sinh khóa đào tạo ngắn hạn:
-
-1. Tên chuyên đề: "Ứng dụng Kỹ năng số trong Quảng bá & Tiêu thụ Nông sản Đặc sản Địa phương".
-2. Thời gian học: 03 buổi tối (Thứ Ba, Thứ Năm, Thứ Bảy từ 18:30 đến 21:00), khai giảng ngày 07/04/2026.
-3. Địa điểm: Phòng máy tính Trung tâm HTCĐ Xã Long Hồ (Lầu 1, Trụ sở UBND xã).
-4. Quyền lợi học viên:
-- Được thực hành trực tiếp trên máy tính bảng và điện thoại cá nhân.
-- Hướng dẫn thiết kế hình ảnh, video ngắn giới thiệu vườn cây và đóng gói giao hàng.
-- Học phí: Hoàn toàn MIỄN PHÍ.
-5. Cách thức đăng ký: Trực tiếp trên Cổng thông tin điện tử mục "Lịch học & Đăng ký" hoặc liên hệ đồng chí phụ trách Trung tâm (SĐT: 0270.3852.114).`,
+    issuer: 'Tổ Chuyển đổi số phối hợp MobiFone Vĩnh Long',
+    summary: 'Mở lớp đào tạo kỹ năng viết prompt 5 thành phần, sử dụng Google NotebookLM tóm tắt văn bản dài và Gamma.app tạo slide báo cáo hành chính dành cho cán bộ, công chức, đoàn thanh niên xã Long Hồ.',
+    content: `Trung tâm HTCĐ phối hợp MobiFone Vĩnh Long tổ chức khóa tập huấn thực hành AI chuyên sâu:
+- Thời gian: Khai giảng lúc 08h00 ngày 01/8/2026.
+- Địa điểm: Phòng máy tính Trung tâm HTCĐ Xã Long Hồ.
+- Giảng viên: Chuyên gia Trí tuệ nhân tạo Trung tâm Kinh doanh Giải pháp số - MobiFone Vĩnh Long.
+- Học phí: 100% Miễn phí. Học viên được cấp tài liệu Giáo trình AI và tài khoản thực hành miễn phí.`,
     isPinned: true,
-    relatedClassId: 'class-001',
-    attachments: [
-      { name: 'Thong-Bao-Chieu-Sinh-Ban-Hang-Online.pdf', size: '1.2 MB', type: 'PDF' }
-    ]
+    relatedClassId: 'class-ai-mobifone',
+    relatedDocumentId: 'doc-mobifone-ai-giao-trinh',
   },
   {
-    id: 'ann-002',
-    title: 'Hội thảo Đầu bờ: Kỹ thuật Ghép Đọt & Phòng chống Rệp Sáp, Sâu Đục Thân trên Cây Có Múi',
-    codeNumber: 'TB-07/TB-HND',
-    publishDate: '2026-03-20',
+    id: 'ann-lop-hat-sac-bua',
+    title: 'Thông báo Khai giảng Lớp Truyền dạy Diễn xướng Dân gian "Hát Sắc Bùa Phú Lễ" – Di sản Phi vật thể Quốc gia',
+    codeNumber: 'TB-189/VHTT-LH',
+    publishDate: '2026-08-18',
     priority: 'important',
+    type: 'chieu_sinh',
+    typeLabel: 'Chiêu sinh lớp học',
+    issuer: 'UBND Xã Long Hồ - Phòng Văn hóa - Xã hội',
+    summary: 'Chiêu sinh 50 học viên tham gia lớp truyền dạy nghệ thuật hát sắc bùa Phú Lễ từ ngày 24/8 đến 27/8/2026 tại Trung tâm Văn hóa Thể thao xã Long Hồ (Trung tâm VHTT Phú Đức cũ).',
+    content: `Căn cứ Kế hoạch số 189/KH-UBND ngày 17/8/2026;
+UBND xã Long Hồ thông báo chiêu sinh lớp truyền dạy diễn xướng dân gian "Hát sắc bùa Phú Lễ" (Tiêu chí số 06 Nông thôn mới nâng cao):
+- Thời gian học: Từ ngày 24/8/2026 đến 27/8/2026 (Khai giảng 08h00 ngày 24/8; Bế giảng 16h00 ngày 27/8/2026).
+- Địa điểm: Trung tâm Văn hóa Thể thao Xã Long Hồ (Trụ sở xã Phú Đức cũ).
+- Học viên được nghệ nhân truyền dạy kỹ thuật hát, cách sử dụng nhạc cụ đạo cụ và cấp Giấy chứng nhận hoàn thành.`,
+    isPinned: true,
+    relatedClassId: 'class-hat-sac-bua',
+    relatedDocumentId: 'doc-kh-hat-sac-bua-phu-le',
+  },
+  {
+    id: 'ann-tap-huan-lua-chanh-day',
+    title: 'Thông báo: Lịch Tập huấn Kỹ thuật Canh tác Lúa Thích ứng Biến đổi Khí hậu & Chanh Dây Ngọt',
+    codeNumber: 'TB-08/HND-LH',
+    publishDate: '2026-07-06',
+    priority: 'normal',
     type: 'hoi_thao',
     typeLabel: 'Hội thảo khuyến nông',
-    issuer: 'Hội Nông Dân phối hợp Trạm Khuyến Nông',
-    summary: 'Tập huấn trực tiếp tại vườn mẫu Ấp An Lạc với sự tham gia của các chuyên gia nông nghiệp hàng đầu Viện Cây ăn quả miền Nam.',
-    content: `Kính gửi: Toàn thể bà con nông dân và hội viên nhà vườn Xã Long Hồ.
-
-Nhằm chuẩn bị tốt cho vụ thu hoạch bưởi và cây có múi vụ hè thu sắp tới, Hội Nông dân xã phối hợp cùng Trạm Khuyến nông huyện tổ chức buổi Hội thảo đầu bờ thực tế:
-- Thời gian: 08h00 sáng Thứ Bảy, ngày 04/04/2026.
-- Địa điểm tập trung: Nhà văn hóa Ấp An Lạc, sau đó di chuyển ra vườn mẫu ông Ba Đạt.
-- Nội dung trọng tâm:
-  + Thực hành kỹ thuật ghép cải tạo vườn bưởi già cỗi.
-  + Hướng dẫn sử dụng chế phẩm sinh học trị rệp sáp rễ không để lại tồn dư hóa chất.
-  + Trao tặng 50 phần quà men vi sinh Trichoderma cho bà con tham dự sớm.
-Kính mời bà con nông dân sắp xếp thời gian đến tham dự đầy đủ.`,
-    isPinned: true,
-    relatedClassId: 'class-002',
-    attachments: [
-      { name: 'Lich-Trinh-Hoi-Thao-Dau-Bo.pdf', size: '850 KB', type: 'PDF' }
-    ]
-  },
-  {
-    id: 'ann-003',
-    title: 'Thông báo Lịch Hỗ trợ Công dân Cài đặt & Sử dụng Dịch vụ Công tại Nhà Văn Hóa các Ấp',
-    codeNumber: 'TB-06/TCS-LH',
-    publishDate: '2026-03-12',
-    priority: 'normal',
-    type: 'hoat_dong_chung',
-    typeLabel: 'Hoạt động cộng đồng',
-    issuer: 'Đoàn Thanh Niên & Tổ Chuyển Đổi Số Cộng Đồng',
-    summary: 'Đội hình lưu động thanh niên tình nguyện sẽ trực tiếp về từng ấp hỗ trợ bà con cài đặt VNeID Mức 2 và hướng dẫn tra cứu hồ sơ đất đai trực tuyến.',
-    content: `Lịch công tác cụ thể của Đội lưu động như sau:
-- Thứ Bảy (28/03): Trực tại Nhà sinh hoạt Ấp Phước Ngươn (08:00 - 11:30).
-- Chủ Nhật (29/03): Trực tại Nhà sinh hoạt Ấp Long Thuận (08:00 - 11:30).
-- Thứ Bảy (04/04): Trực tại Nhà sinh hoạt Ấp Thạnh Hưng (08:00 - 11:30).
-Bà con khi đi vui lòng mang theo Căn cước công dân gắn chíp và điện thoại thông minh có gắn SIM chính chủ.`,
+    issuer: 'BCH Hội Nông Dân Xã Long Hồ',
+    summary: 'Hội Nông dân xã tổ chức buổi chuyển giao kỹ thuật trồng lúa ứng phó hạn mặn và trồng chanh dây ngọt vào lúc 08h00 ngày 09/7/2026 tại Nhà ông Nguyễn Văn Năm (Chi hội trưởng ấp An Hiệp).',
+    content: `Kính mời toàn thể hội viên nông dân ấp An Hiệp, An Thành và các ấp lân cận tham dự buổi tập huấn kỹ thuật nông nghiệp thích ứng biến đổi khí hậu theo Giấy mời số 08-GM/HNDX.`,
     isPinned: false,
-    relatedDocumentId: 'doc-002',
-  },
-  {
-    id: 'ann-004',
-    title: 'Phát động Phong trào "Gia Đình Học Tập - Dòng Họ Học Tập Suốt Đời" Năm 2026',
-    codeNumber: 'TB-05/TB-HKH',
-    publishDate: '2026-02-25',
-    priority: 'normal',
-    type: 'chinh_sach',
-    typeLabel: 'Chính sách & Khuyến học',
-    issuer: 'Hội Khuyến Học Xã Long Hồ',
-    summary: 'Triển khai tiêu chí thi đua công nhận danh hiệu Gia đình học tập, Dòng họ học tập và Cộng đồng học tập tiêu biểu gắn liền với xây dựng Nông thôn mới nâng cao.',
-    content: `Hội Khuyến học xã phát động đợt đăng ký thi đua đến toàn thể 07 ấp. Các gia đình có con em vượt khó học giỏi, người lớn tích cực tham gia các lớp bồi dưỡng kiến thức tại Trung tâm HTCĐ sẽ được tuyên dương khen thưởng trong Ngày hội Khuyến học sắp tới.`,
-    isPinned: false,
+    relatedDocumentId: 'doc-giay-moi-tap-huan-lua',
   }
 ];
 
 export const INITIAL_CLASSES: ClassScheduleItem[] = [
   {
-    id: 'class-001',
-    title: 'Kỹ năng Bán hàng Nông sản qua Mạng Xã hội & Zalo Mini App',
+    id: 'class-ai-mobifone',
+    title: 'Ứng dụng AI Thực hành trong Công việc Hành chính & Nâng cao Hiệu suất Làm việc',
     topicCategory: 'chuyen_doi_so',
-    topicLabel: 'Chuyển đổi số nông nghiệp',
-    instructor: 'ThS. Nguyễn Hoàng Nam',
-    instructorTitle: 'Chuyên gia Chuyển đổi số Nông nghiệp',
+    topicLabel: 'Trí tuệ nhân tạo & Kỹ năng số',
+    instructor: 'Tổ Chuyên gia Giải pháp số MobiFone Vĩnh Long',
+    instructorTitle: 'Kỹ sư Giải pháp Công nghệ Số',
     venue: 'Phòng Máy tính TT HTCĐ Xã Long Hồ',
     addressNote: 'Lầu 1, Trụ sở UBND Xã Long Hồ',
-    startDate: '2026-04-07',
-    endDate: '2026-04-16',
-    timeSlot: '18:30 - 20:30',
-    sessionDays: 'Thứ Ba, Thứ Năm, Thứ Bảy',
-    totalHours: 12,
-    capacity: 25,
-    registeredCount: 18,
+    startDate: '2026-08-01',
+    endDate: '2026-08-05',
+    timeSlot: '08:00 - 11:30',
+    sessionDays: 'Thứ Bảy, Chủ Nhật',
+    totalHours: 16,
+    capacity: 35,
+    registeredCount: 28,
     fee: 'Miễn phí 100%',
-    targetAudience: 'Nhà vườn, thanh niên khởi nghiệp, chủ cơ sở kinh doanh tại địa phương',
+    targetAudience: 'Cán bộ, công chức, đoàn thanh niên, người lao động các ấp trên địa bàn xã',
     status: 'sap_dien_ra',
-    description: 'Khóa học cầm tay chỉ việc giúp học viên tự tin chụp hình vườn cây đẹp mắt, viết bài giới thiệu trái cây sạch, tạo mã thanh toán VietQR và livestream giới thiệu đặc sản Long Hồ.',
+    description: 'Thực hành cầm tay chỉ việc viết prompt 5 thành phần, sử dụng NotebookLM tóm tắt văn bản quy phạm pháp luật và tạo slide trình chiếu Gamma.app.',
     curriculum: [
-      'Buổi 1: Tổng quan kinh tế số và cách xây dựng thương hiệu cá nhân nhà vườn.',
-      'Buổi 2: Kỹ năng chụp ảnh sản phẩm, quay video ngắn bằng điện thoại thông minh.',
-      'Buổi 3: Lập gian hàng, gắn giỏ hàng và quy trình nhận đơn giao hàng.',
-      'Buổi 4: Quản lý khách hàng quen thuộc qua nhóm Zalo Chăm sóc Khách hàng.'
+      'Buổi 1: Cấu trúc prompt 5 thành phần và thực hành soạn văn bản hành chính công.',
+      'Buổi 2: Tóm tắt chỉ thị dài và trích dẫn bằng Google NotebookLM không bị ảo giác.',
+      'Buổi 3: Tạo bài thuyết trình slide tự động bằng Gamma.app.',
+      'Buổi 4: Quy trình 5 bước bảo đảm an toàn dữ liệu công vụ khi dùng AI.'
     ],
     contactPhone: '0270.3852.114',
   },
   {
-    id: 'class-002',
-    title: 'Kỹ thuật Cắt tỉa Tạo tán & Xử lý Ra hoa Nghịch vụ Cây Có Múi',
-    topicCategory: 'nong_nghiep',
-    topicLabel: 'Kỹ thuật nông nghiệp',
-    instructor: 'Kỹ sư Võ Văn Kiệt',
-    instructorTitle: 'Phó Trạm Trưởng Trạm Khuyến Nông',
-    venue: 'Hội trường UBND Xã & Vườn thực nghiệm Ấp An Lạc',
-    addressNote: 'Đường số 3, Trung tâm Hành chính Xã Long Hồ',
-    startDate: '2026-04-04',
-    endDate: '2026-04-05',
-    timeSlot: '07:30 - 11:30',
-    sessionDays: 'Thứ Bảy, Chủ Nhật',
-    totalHours: 8,
-    capacity: 40,
-    registeredCount: 32,
+    id: 'class-hat-sac-bua',
+    title: 'Lớp Truyền dạy Thực hành Diễn xướng Dân gian "Hát Sắc Bùa Phú Lễ" – Di sản Quốc gia',
+    topicCategory: 'giao_duc_khac',
+    topicLabel: 'Văn hóa nghệ thuật truyền thống',
+    instructor: 'Nghệ nhân Dân gian & Giảng viên Văn hóa',
+    instructorTitle: 'Nghệ nhân Di sản Văn hóa Phi vật thể',
+    venue: 'Trung tâm Văn hóa Thể thao Xã Long Hồ',
+    addressNote: 'Trụ sở Trung tâm Văn hóa xã Phú Đức cũ',
+    startDate: '2026-08-24',
+    endDate: '2026-08-27',
+    timeSlot: '08:00 - 16:30',
+    sessionDays: 'Thứ Hai đến Thứ Năm (4 ngày liên tục)',
+    totalHours: 28,
+    capacity: 50,
+    registeredCount: 42,
     fee: 'Miễn phí 100%',
-    targetAudience: 'Hội viên nông dân canh tác cam sành, bưởi năm roi, bưởi da xanh',
+    targetAudience: 'Giáo viên âm nhạc, cán bộ văn hóa, thành viên CLB đờn ca tài tử và đoàn viên thanh niên',
     status: 'sap_dien_ra',
-    description: 'Trang bị kỹ năng tỉa cành thông thoáng đón ánh sáng, khống chế chiều cao cây để dễ bao trái và phun thuốc sinh học, tính toán thời điểm xiết nước đón giá bưởi Tết cao.',
+    description: 'Bảo tồn di sản văn hóa phi vật thể theo Tiêu chí 06 Nông thôn mới nâng cao. Học viên được thực hành nhạc cụ, đội hình và cấp Giấy chứng nhận hoàn thành.',
     curriculum: [
-      'Phần lý thuyết: Cơ chế kích thích mầm hoa và nhu cầu dinh dưỡng thời kỳ nuôi trái.',
-      'Phần thực hành: Cầm kéo trực tiếp cắt tỉa tại vườn thực nghiệm, kỹ thuật quét vôi ngừa nấm bệnh.'
+      'Phần 1: Giới thiệu cội nguồn và ý nghĩa nghi lễ Hát sắc bùa Phú Lễ.',
+      'Phần 2: Học hát các bài mẫu và cách gõ nhịp sanh sứa, trống cơm.',
+      'Phần 3: Dàn dựng đội hình diễn xướng và thực hành biểu diễn tập thể.'
     ],
-    contactPhone: '0918.452.339',
+    contactPhone: '0919.231.844',
   },
   {
-    id: 'class-003',
-    title: 'Nghề Đan Thủ công Lục Bình Mỹ nghệ Xuất khẩu (Khóa 2/2026)',
+    id: 'class-livestream-tmdt',
+    title: 'Kỹ năng Bán hàng Nông sản & Sản phẩm OCOP qua Livestream Chuyên nghiệp',
     topicCategory: 'nghe_nong_thon',
-    topicLabel: 'Nghề truyền thống & Việc làm',
-    instructor: 'Nghệ nhân Nguyễn Thị Lệ',
-    instructorTitle: 'Chủ nhiệm Hợp tác xã Thủ công Mỹ nghệ',
-    venue: 'Nhà Văn hóa Sinh hoạt Cộng đồng Ấp Long Thuận',
-    addressNote: 'Tổ 5, Ấp Long Thuận, Xã Long Hồ',
-    startDate: '2026-03-20',
-    endDate: '2026-04-10',
-    timeSlot: '13:30 - 16:30',
-    sessionDays: 'Thứ Hai đến Thứ Sáu',
-    totalHours: 45,
+    topicLabel: 'Kinh tế số & Thương mại điện tử',
+    instructor: 'ThS. Nguyễn Hoàng Nam',
+    instructorTitle: 'Chuyên gia Thương mại Điện tử & Livestream',
+    venue: 'Phòng Studio Thực nghiệm TT HTCĐ Xã Long Hồ',
+    addressNote: 'Đường số 3, Trung tâm Hành chính Xã Long Hồ',
+    startDate: '2026-08-15',
+    endDate: '2026-08-22',
+    timeSlot: '18:30 - 20:30',
+    sessionDays: 'Thứ Ba, Thứ Năm, Thứ Bảy',
+    totalHours: 12,
     capacity: 30,
-    registeredCount: 27,
+    registeredCount: 25,
     fee: 'Miễn phí 100%',
-    targetAudience: 'Lao động nữ nông nhàn, người khuyết tật có nguyện vọng học nghề tại nhà',
-    status: 'dang_dien_ra',
-    description: 'Đào tạo kỹ năng đan sọt, thảm và túi xách từ sợi lục bình khô. Học viên được hỗ trợ toàn bộ nguyên phụ liệu trong suốt quá trình học và bao tiêu sản phẩm đầu ra sau kiểm tra tay nghề.',
+    targetAudience: 'Nhà vườn trồng bưởi, cam sành, chủ cơ sở chế biến thủ công mỹ nghệ xã Long Hồ',
+    status: 'sap_dien_ra',
+    description: 'Khóa học trang bị kỹ năng livestream 5 phần, setup phòng live với ánh sáng mic chất lượng cao, tối ưu tỷ lệ nhấp và chuyển đổi đơn hàng.',
     curriculum: [
-      'Tuần 1: Kỹ thuật chọn sợi và đan các nan cơ bản.',
-      'Tuần 2: Ráp khung thép và hoàn thiện hoa văn.',
-      'Tuần 3: Xử lý màu sắc, chống ẩm mốc và may lót phụ kiện.'
+      'Buổi 1: Xây dựng thương hiệu cá nhân và chuẩn bị thiết bị phòng live.',
+      'Buổi 2: Soạn thảo kịch bản 5 phần và kịch bản dự phòng chống tụt view.',
+      'Buổi 3: Thực hành nói trước ống kính và xử lý bình luận tiêu cực an toàn pháp lý.'
     ],
     contactPhone: '0939.812.504',
   },
   {
-    id: 'class-004',
-    title: 'Tập huấn Sơ cấp cứu Ban đầu & Chăm sóc Người cao tuổi tại Gia đình',
-    topicCategory: 'y_te_suc_khoe',
-    topicLabel: 'Sức khỏe & Đời sống',
-    instructor: 'Bác sĩ CK I Trần Thị Mai',
-    instructorTitle: 'Trưởng Trạm Y Tế Xã Long Hồ',
-    venue: 'Hội trường Trạm Y Tế Xã Long Hồ',
-    addressNote: 'Khu dân cư Ấp Phú Hưng, Xã Long Hồ',
-    startDate: '2026-04-12',
-    endDate: '2026-04-12',
-    timeSlot: '08:00 - 11:30',
-    sessionDays: 'Chủ Nhật',
-    totalHours: 4,
-    capacity: 50,
-    registeredCount: 22,
+    id: 'class-che-bien-mon-an',
+    title: 'Khóa Đào tạo Sơ cấp Nghề: Kỹ thuật Chế biến Món ăn & Nữ công Gia chánh (Kế hoạch 38 & 24)',
+    topicCategory: 'nghe_nong_thon',
+    topicLabel: 'Đào tạo nghề lao động nông thôn',
+    instructor: 'Giảng viên Trung tâm GDTX Vĩnh Long Cơ sở 2',
+    instructorTitle: 'Bếp trưởng & Giảng viên Dạy nghề',
+    venue: 'Hội trường Nhà Văn hóa Ấp Long Thuận',
+    addressNote: 'Ấp Long Thuận, Xã Long Hồ',
+    startDate: '2026-09-01',
+    endDate: '2026-10-15',
+    timeSlot: '13:30 - 16:30',
+    sessionDays: 'Thứ Hai đến Thứ Sáu hàng tuần',
+    totalHours: 150,
+    capacity: 35,
+    registeredCount: 29,
     fee: 'Miễn phí 100%',
-    targetAudience: 'Người chăm sóc gia đình, tình nguyện viên chữ thập đỏ, hội viên người cao tuổi',
+    targetAudience: 'Lao động nữ nông thôn, thanh niên hoàn thành nghĩa vụ quân sự và công an xuất ngũ',
     status: 'sap_dien_ra',
-    description: 'Thực hành hô hấp nhân tạo, xử trí hạ đường huyết, băng bó vết thương hở và các bài tập vận động nhẹ nhàng hồi phục chức năng cho người lớn tuổi.',
+    description: 'Chương trình đào tạo nghề theo Kế hoạch 38/KH-UBND và Kế hoạch 24/KH-GDTXVL. Hỗ trợ tiền ăn, tiền đi lại cho đối tượng chính sách và cấp chứng chỉ sơ cấp nghề.',
     curriculum: [
-      'Chuyên đề 1: Nhận diện sớm dấu hiệu tai biến mạch máu não và các bước xử trí khẩn.',
-      'Chuyên đề 2: Thực hành ép tim thổi ngạt và cố định gãy xương.',
-      'Chuyên đề 3: Tư vấn dinh dưỡng lành mạnh ít muối cho người bệnh tim mạch.'
+      'Giai đoạn 1: Vệ sinh an toàn thực phẩm và kỹ thuật sơ chế nguyên liệu địa phương.',
+      'Giai đoạn 2: Chế biến các món ăn tiệc cưới, ẩm thực truyền thống Nam Bộ.',
+      'Giai đoạn 3: Thực hành quản lý bếp ăn, tính toán giá thành mở quán ăn kinh doanh.'
     ],
     contactPhone: '0270.3852.120',
-  },
-  {
-    id: 'class-005',
-    title: 'Phổ cập Tin học Cơ bản & Khai thác Internet An toàn cho Người Lớn Tuổi',
-    topicCategory: 'chuyen_doi_so',
-    topicLabel: 'Tin học cộng đồng',
-    instructor: 'Đ/c Phan Minh Trí',
-    instructorTitle: 'Bí thư Đoàn Xã - Trưởng Tổ CĐS Trẻ',
-    venue: 'Phòng Máy tính TT HTCĐ Xã Long Hồ',
-    addressNote: 'Lầu 1, Trụ sở UBND Xã Long Hồ',
-    startDate: '2026-04-18',
-    endDate: '2026-04-26',
-    timeSlot: '08:30 - 10:30',
-    sessionDays: 'Thứ Bảy, Chủ Nhật hàng tuần',
-    totalHours: 8,
-    capacity: 20,
-    registeredCount: 14,
-    fee: 'Miễn phí 100%',
-    targetAudience: 'Các chú bác cán bộ hưu trí, người cao tuổi trên địa bàn xã',
-    status: 'sap_dien_ra',
-    description: 'Khóa học thân thiện, tốc độ chậm rãi giúp các cô chú đọc báo điện tử, gọi điện video thăm hỏi con cháu ở xa, tra cứu kết quả xét nghiệm bệnh viện và nhận biết chiêu trò lừa đảo qua mạng.',
-    curriculum: [
-      'Bài 1: Làm quen với điện thoại thông minh, điều chỉnh cỡ chữ lớn dễ đọc.',
-      'Bài 2: Gọi video miễn phí qua Zalo và tìm kiếm tin tức trên Youtube.',
-      'Bài 3: Cách tra cứu thông tin y tế, lịch xe buýt và cảnh giác tin giả mạo lừa gạt.'
-    ],
-    contactPhone: '0978.223.119',
   }
 ];
 
 export const INITIAL_REGISTRATIONS: RegistrationItem[] = [
   {
     id: 'reg-001',
-    classId: 'class-001',
-    classTitle: 'Kỹ năng Bán hàng Nông sản qua Mạng Xã hội & Zalo Mini App',
+    classId: 'class-ai-mobifone',
+    classTitle: 'Ứng dụng AI Thực hành trong Công việc Hành chính & Nâng cao Hiệu suất Làm việc',
     fullName: 'Lê Văn Thanh',
     phoneNumber: '0918.234.567',
     hamlet: 'Ấp An Lạc',
     yearOfBirth: '1988',
-    note: 'Nhà có 5 công bưởi da xanh muốn học bán trực tiếp.',
-    registeredAt: '2026-03-24 14:20',
+    note: 'Cán bộ đoàn muốn học cách ứng dụng AI làm poster và kế hoạch.',
+    registeredAt: '2026-07-23 09:20',
   },
   {
     id: 'reg-002',
-    classId: 'class-001',
-    classTitle: 'Kỹ năng Bán hàng Nông sản qua Mạng Xã hội & Zalo Mini App',
+    classId: 'class-hat-sac-bua',
+    classTitle: 'Lớp Truyền dạy Thực hành Diễn xướng Dân gian "Hát Sắc Bùa Phú Lễ" – Di sản Quốc gia',
     fullName: 'Nguyễn Thị Hồng Hạnh',
     phoneNumber: '0939.567.890',
     hamlet: 'Ấp Long Thuận',
-    yearOfBirth: '1995',
-    note: 'Muốn học cách tạo video Tiktok giới thiệu mứt dừa địa phương.',
-    registeredAt: '2026-03-25 09:15',
+    yearOfBirth: '1992',
+    note: 'Giáo viên dạy âm nhạc trường tiểu học đăng ký tham gia.',
+    registeredAt: '2026-08-19 14:15',
   },
   {
     id: 'reg-003',
-    classId: 'class-002',
-    classTitle: 'Kỹ thuật Cắt tỉa Tạo tán & Xử lý Ra hoa Nghịch vụ Cây Có Múi',
+    classId: 'class-livestream-tmdt',
+    classTitle: 'Kỹ năng Bán hàng Nông sản & Sản phẩm OCOP qua Livestream Chuyên nghiệp',
     fullName: 'Trần Văn Đực',
     phoneNumber: '0908.765.432',
     hamlet: 'Ấp Phước Ngươn',
-    yearOfBirth: '1972',
-    note: 'Mong muốn học cách xử lý ra hoa bưởi nghịch vụ bán dịp Tết.',
-    registeredAt: '2026-03-23 16:45',
+    yearOfBirth: '1975',
+    note: 'Gia đình có vườn bưởi da xanh muốn học bán hàng qua TikTok Shop.',
+    registeredAt: '2026-08-16 16:45',
   }
 ];

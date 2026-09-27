@@ -9,7 +9,8 @@ import {
   Award, 
   Users, 
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  Lock
 } from 'lucide-react';
 import { MainNavTab } from '../types';
 
@@ -17,6 +18,7 @@ interface HeroBannerProps {
   onSelectTab: (tab: MainNavTab) => void;
   onOpenUpload: () => void;
   onSearchSubmit: (query: string) => void;
+  isAdmin: boolean;
   totalDocuments: number;
   totalClasses: number;
   totalRegistrations: number;
@@ -26,6 +28,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
   onSelectTab,
   onOpenUpload,
   onSearchSubmit,
+  isAdmin,
   totalDocuments,
   totalClasses,
   totalRegistrations,
@@ -117,10 +120,15 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
 
             <button
               onClick={onOpenUpload}
+              title={isAdmin ? 'Đưa tài liệu lên web' : 'Chỉ tài khoản quản trị mới có quyền đưa tài liệu lên'}
               className="px-4 py-2.5 bg-transparent hover:bg-stone-800 text-amber-300 font-medium text-sm rounded-lg border border-amber-600/40 hover:border-amber-500 transition-colors flex items-center gap-2 whitespace-nowrap"
             >
-              <Upload className="w-4 h-4" />
-              <span>Đưa tài liệu lên web</span>
+              {isAdmin ? (
+                <Upload className="w-4 h-4" />
+              ) : (
+                <Lock className="w-4 h-4 text-amber-400" />
+              )}
+              <span>Đưa tài liệu lên web {isAdmin ? '' : '(Quản trị)'}</span>
             </button>
           </div>
         </div>
