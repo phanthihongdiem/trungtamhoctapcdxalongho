@@ -1,0 +1,6 @@
+{
+  "name": "Trung tâm Học tập Cộng đồng Xã Long Hồ",
+  "description": "Cổng thông tin điện tử Trung tâm Học tập Cộng đồng Xã Long Hồ - Quản lý tài liệu học tập, văn bản chỉ đạo, thông báo chiêu sinh và lịch học cộng đồng.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
