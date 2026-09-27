@@ -1,4 +1,4 @@
-import { DocumentItem, AnnouncementItem, ClassScheduleItem, RegistrationItem } from '../types';
+import { DocumentItem, AnnouncementItem, ClassScheduleItem, RegistrationItem, StaffMember, FeedbackItem } from '../types';
 
 export const HAMLETS_LIST = [
   'Ấp An Lạc',
@@ -10,7 +10,10 @@ export const HAMLETS_LIST = [
   'Ấp Tân Hưng',
   'Ấp An Hiệp',
   'Ấp An Thành',
-  'Khu vực Thị tứ Long Hồ',
+  'Ấp Long Hòa',
+  'Ấp Phú Mỹ',
+  'Ấp Phước Yên',
+  'Ấp Long Hưng',
 ];
 
 export const INITIAL_DOCUMENTS: DocumentItem[] = [
@@ -981,3 +984,169 @@ export const INITIAL_REGISTRATIONS: RegistrationItem[] = [
     registeredAt: '2026-08-16 16:45',
   }
 ];
+
+// --- DANH SÁCH BAN GIÁM ĐỐC, CÁN BỘ QUẢN LÝ VÀ GIÁO VIÊN/BÁO CÁO VIÊN ---
+// Trích theo Hồ sơ minh chứng Chỉ số 1 – Tiêu chí 5.2 về Nông thôn mới ngày 18/9/2026
+export const INITIAL_STAFF_MEMBERS: StaffMember[] = [
+  // I. BAN GIÁM ĐỐC TRUNG TÂM HỌC TẬP CỘNG ĐỒNG
+  {
+    id: 'staff-01',
+    stt: 1,
+    fullName: 'Nguyễn Thị Mỹ Hạnh',
+    roleInCenter: 'Giám đốc (kiêm nhiệm)',
+    roleInGovernment: 'Phó Chủ tịch UBND xã Long Hồ',
+    phone: '0918639833',
+    group: 'ban_giam_doc',
+    responsibilities: 'Chịu trách nhiệm toàn diện về công tác tổ chức, chỉ đạo chiến lược học tập suốt đời, kế hoạch ngân sách và điều hành hoạt động chung của Trung tâm.',
+    avatarInitials: 'MH'
+  },
+  {
+    id: 'staff-02',
+    stt: 2,
+    fullName: 'Lưu Quốc Trụ',
+    roleInCenter: 'Phó Giám đốc (Kiêm nhiệm)',
+    roleInGovernment: 'Chủ tịch Hội Khuyến học xã Long Hồ',
+    phone: '0984141313',
+    group: 'ban_giam_doc',
+    responsibilities: 'Phụ trách phong trào thi đua Khuyến học - Khuyến tài, xây dựng gia đình/dòng họ học tập và liên kết các nguồn lực hỗ trợ cộng đồng.',
+    avatarInitials: 'QT'
+  },
+  {
+    id: 'staff-03',
+    stt: 3,
+    fullName: 'Nguyễn Văn Nho',
+    roleInCenter: 'Phó Giám đốc (Kiêm nhiệm)',
+    roleInGovernment: 'Hiệu trưởng Trường Trung học cơ sở Long Phước A',
+    phone: '0772137275',
+    group: 'ban_giam_doc',
+    responsibilities: 'Phụ trách chuyên môn đào tạo, bồi dưỡng, thẩm định giáo trình bài giảng và điều phối mạng lưới giáo viên, báo cáo viên.',
+    avatarInitials: 'VN'
+  },
+
+  // II. CÁN BỘ QUẢN LÝ VÀ TRỢ LÝ
+  {
+    id: 'staff-04',
+    stt: 1,
+    fullName: 'Phạm Thị Thiên Hương',
+    roleInCenter: 'Cán bộ',
+    roleInGovernment: 'Nhân viên trường Trung học cơ sở Long Hồ',
+    phone: '0782847880',
+    group: 'can_bo_quan_ly',
+    responsibilities: 'Theo dõi tiến độ mở lớp, hồ sơ minh chứng học tập tiêu chí NTM và quản lý phòng máy vi tính cộng đồng.',
+    avatarInitials: 'TH'
+  },
+  {
+    id: 'staff-05',
+    stt: 2,
+    fullName: 'Nguyễn Hữu Hoàng',
+    roleInCenter: 'Cán bộ',
+    roleInGovernment: 'Giáo viên trường Tiểu học Long An A',
+    phone: '0949625789',
+    group: 'can_bo_quan_ly',
+    responsibilities: 'Phối hợp tổ chức các lớp xóa mù chữ chức năng, bồi dưỡng tin học ứng dụng và hỗ trợ điều phối lớp học lưu động tại các ấp.',
+    avatarInitials: 'HH'
+  },
+  {
+    id: 'staff-06',
+    stt: 3,
+    fullName: 'Lê Thị Xuân Lan',
+    roleInCenter: 'Cán bộ',
+    roleInGovernment: 'Phó Hiệu trưởng trường Mầm non Phú Đức',
+    phone: '0975885138',
+    group: 'can_bo_quan_ly',
+    responsibilities: 'Phụ trách các chuyên đề chăm sóc giáo dục mầm non, kỹ năng gia đình, dinh dưỡng và phổ cập kiến thức phụ nữ nông thôn.',
+    avatarInitials: 'XL'
+  },
+  {
+    id: 'staff-07',
+    stt: 4,
+    fullName: 'Nguyễn Thị Mỹ Trang',
+    roleInCenter: 'Kế toán',
+    roleInGovernment: 'Kế toán Văn phòng HĐND và UBND xã Long Hồ',
+    phone: '0901090683',
+    group: 'can_bo_quan_ly',
+    responsibilities: 'Quản lý tài chính, lập dự toán kinh phí hỗ trợ đào tạo nghề cho lao động nông thôn theo Kế hoạch 38 và các chương trình mục tiêu quốc gia.',
+    avatarInitials: 'MT'
+  },
+  {
+    id: 'staff-08',
+    stt: 5,
+    fullName: 'Lê Thị Việt Thắm',
+    roleInCenter: 'Thủ quỹ',
+    roleInGovernment: 'Chuyên viên Văn phòng HĐND và UBND xã Long Hồ',
+    phone: '0769597969',
+    group: 'can_bo_quan_ly',
+    responsibilities: 'Thực hiện chi trả chế độ hỗ trợ tiền ăn, tiền đi lại cho học viên diện chính sách và bảo quản cơ sở vật chất, công cụ giảng dạy.',
+    avatarInitials: 'VT'
+  }
+];
+
+export const INITIAL_FEEDBACK: FeedbackItem[] = [
+  {
+    id: 'fb-001',
+    fullName: 'Nguyễn Văn Sang',
+    phoneNumber: '0913.882.341',
+    hamlet: 'Ấp An Thành',
+    targetRecipient: 'Đ/c Nguyễn Thị Mỹ Hạnh (Giám đốc kiêm PCT UBND Xã)',
+    topic: 'Đề xuất mở lớp đào tạo nghề tại ấp',
+    title: 'Đề nghị tổ chức lớp tập huấn bón phân hữu cơ và ứng phó hạn mặn tại Nhà văn hóa ấp An Thành',
+    content: 'Kính gửi Ban Giám đốc Trung tâm. Hiện nay bà con trồng lúa và vườn cây ăn trái tại ấp An Thành rất muốn tiếp cận thêm kỹ thuật bón phân hữu cơ và xử lý hạn mặn sớm. Rất mong Trung tâm xem xét tổ chức thêm 01 buổi tập huấn vào cuối tuần tại ấp để người lớn tuổi tiện tham gia.',
+    createdAt: '2026-09-20 08:30',
+    status: 'da_tra_loi',
+    officialResponse: {
+      responderName: 'Đ/c Nguyễn Thị Mỹ Hạnh',
+      responderTitle: 'Giám đốc TTHTCĐ - Phó Chủ tịch UBND Xã Long Hồ',
+      responseDate: '2026-09-21 10:15',
+      content: 'Ban Giám đốc Trung tâm HTCĐ ghi nhận và hoan nghênh ý kiến của bà con ấp An Thành. Hiện Trung tâm đã phối hợp cùng Hội Nông dân xã lên kế hoạch đưa cán bộ khuyến nông về tổ chức lớp tại Nhà văn hóa ấp An Thành vào tuần thứ 2 của tháng tới. Kế hoạch cụ thể sẽ có giấy mời gửi tới từng tổ nhân dân tự quản.'
+    }
+  },
+  {
+    id: 'fb-002',
+    fullName: 'Trần Thị Thu Ba',
+    phoneNumber: '0942.551.879',
+    hamlet: 'Ấp Long Thuận',
+    targetRecipient: 'Đ/c Lưu Quốc Trụ (Phó Giám đốc kiêm Chủ tịch Hội Khuyến học)',
+    topic: 'Chương trình & Tài liệu học tập',
+    title: 'Xin bổ sung tài liệu tóm tắt cẩm nang nộp hồ sơ trực tuyến dạng in giấy tại Nhà văn hóa ấp',
+    content: 'Gia đình tôi có đọc qua tài liệu chuyển đổi số trên cổng thông tin rất hay. Tuy nhiên bà con lớn tuổi trong ấp mắt kém nên mong Trung tâm cấp thêm một số bản in tóm tắt đặt tại Nhà sinh hoạt văn hóa ấp để bà con tới đọc thuận tiện hơn.',
+    createdAt: '2026-09-22 14:20',
+    status: 'da_tra_loi',
+    officialResponse: {
+      responderName: 'Đ/c Lưu Quốc Trụ',
+      responderTitle: 'Phó Giám đốc TTHTCĐ - Chủ tịch Hội Khuyến học',
+      responseDate: '2026-09-23 09:00',
+      content: 'Trung tâm đã chỉ đạo Tổ công nghệ số cộng đồng in ấn 50 cuốn cẩm nang bỏ túi hướng dẫn dịch vụ công trực tuyến và phân bổ về Nhà văn hóa 13 ấp (trong đó có ấp Long Thuận). Bà con có thể đến gặp Trưởng ấp hoặc Cán bộ văn hóa để nhận tài liệu miễn phí.'
+    }
+  },
+  {
+    id: 'fb-003',
+    fullName: 'Lê Hoàng Nam',
+    phoneNumber: '0988.334.212',
+    hamlet: 'Ấp Phước Ngươn',
+    targetRecipient: 'Đ/c Nguyễn Văn Nho (Phó Giám đốc phụ trách chuyên môn)',
+    topic: 'Cơ sở vật chất & Nhà văn hóa',
+    title: 'Đề xuất tăng cường khung giờ mở cửa phòng máy tính kết nối mạng phục vụ học sinh nghèo',
+    content: 'Em là đoàn viên thường xuyên về sinh hoạt tại ấp Phước Ngươn, thấy phòng máy vi tính của Trung tâm rất bổ ích cho các em học sinh nghèo làm bài tập và tra cứu. Đề xuất Trung tâm mở thêm khung giờ buổi tối các ngày cuối tuần để các em thuận tiện tới học tập bổ sung.',
+    createdAt: '2026-09-25 19:40',
+    status: 'da_tra_loi',
+    officialResponse: {
+      responderName: 'Đ/c Nguyễn Văn Nho',
+      responderTitle: 'Phó Giám đốc TTHTCĐ - Hiệu trưởng THCS Long Phước A',
+      responseDate: '2026-09-26 08:30',
+      content: 'Cảm ơn em đã gửi ý kiến đóng góp thiết thực. Ban Giám đốc đã phân công đồng chí Phạm Thị Thiên Hương và các giáo viên phụ trách phòng máy mở rộng khung giờ phục vụ từ 18h30 đến 20h30 vào các tối Thứ Sáu và Thứ Bảy hàng tuần.'
+    }
+  },
+  {
+    id: 'fb-004',
+    fullName: 'Võ Văn Hùng',
+    phoneNumber: '0918.776.432',
+    hamlet: 'Ấp Bình Hòa',
+    targetRecipient: 'Toàn thể Ban Giám đốc',
+    topic: 'Đề xuất mở lớp đào tạo nghề tại ấp',
+    title: 'Nguyện vọng mở khóa ngắn hạn dạy kỹ thuật bảo dưỡng và sửa chữa máy cày, máy gặt mini',
+    content: 'Bà con nông dân ấp Bình Hòa hiện sử dụng nhiều máy kéo, máy phun xịt tự động và máy gặt nhưng khi gặp trục trặc kỹ thuật cơ bản phải chở đi xa sửa tốn kém. Mong Trung tâm liên kết với trung tâm giáo dục nghề nghiệp mở khóa thực hành cầm tay chỉ việc ngắn hạn.',
+    createdAt: '2026-09-26 15:10',
+    status: 'dang_xu_ly'
+  }
+];
+

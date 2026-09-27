@@ -12,7 +12,8 @@ import {
   Files,
   Lock,
   LogOut,
-  UserCheck
+  UserCheck,
+  Users
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -43,6 +44,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   const navItems: { id: MainNavTab; label: string; icon: React.ReactNode }[] = [
     { id: 'overview', label: 'Trang chủ', icon: <BookOpen className="w-4 h-4" /> },
+    { id: 'about_feedback', label: 'Giới thiệu & Ý kiến', icon: <Users className="w-4 h-4" /> },
     { id: 'documents', label: 'Tài liệu học tập', icon: <Files className="w-4 h-4" /> },
     { id: 'schedules', label: 'Lịch học & Đăng ký', icon: <Calendar className="w-4 h-4" /> },
     { id: 'announcements', label: 'Thông báo', icon: <Bell className="w-4 h-4" /> },
@@ -57,16 +59,16 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-stone-900 text-stone-100 border-b border-stone-800 shadow-sm backdrop-blur-md bg-stone-900/95">
+    <header className="sticky top-0 z-40 bg-white/95 text-slate-800 border-b border-slate-200/90 shadow-xs backdrop-blur-md">
       {/* Utility Notice Banner */}
-      <div className="bg-amber-900/70 border-b border-amber-700/40 text-amber-200 text-xs py-1.5 px-4 sm:px-8 flex items-center justify-between">
+      <div className="bg-blue-800 border-b border-blue-700/80 text-blue-100 text-xs py-1.5 px-4 sm:px-8 flex items-center justify-between">
         <div className="flex items-center gap-2 truncate">
-          <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
-          <span className="truncate">
+          <span className="inline-block w-2 h-2 rounded-full bg-sky-400 animate-pulse shrink-0"></span>
+          <span className="truncate font-medium">
             Cổng học tập số hoá phục vụ nhân dân Xã Long Hồ, Huyện Long Hồ, Tỉnh Vĩnh Long
           </span>
         </div>
-        <div className="hidden sm:flex items-center gap-3 shrink-0 text-amber-200/80">
+        <div className="hidden sm:flex items-center gap-3 shrink-0 text-blue-200/90">
           <span>Đường dây nóng: 0270.3852.114</span>
           <span>·</span>
           <span>Thứ Hai - Thứ Bảy: 07:30 - 17:00</span>
@@ -80,16 +82,16 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex items-center gap-3">
             <button
               onClick={() => onSelectTab('overview')}
-              className="text-left group flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-sm"
+              className="text-left group flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-sm"
             >
-              <div className="w-9 h-9 rounded-md bg-amber-600 flex items-center justify-center text-white font-serif font-bold text-lg shadow-inner">
+              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center text-white font-serif font-bold text-lg shadow-xs">
                 LH
               </div>
               <div className="flex flex-col">
-                <span className="font-serif text-base sm:text-lg font-semibold tracking-tight text-white group-hover:text-amber-300 transition-colors whitespace-nowrap">
+                <span className="font-serif text-base sm:text-lg font-bold tracking-tight text-blue-950 group-hover:text-blue-600 transition-colors whitespace-nowrap">
                   TT HTCĐ XÃ LONG HỒ
                 </span>
-                <span className="text-[11px] text-stone-400 tracking-wider uppercase font-medium">
+                <span className="text-[11px] text-blue-600 tracking-wider uppercase font-semibold">
                   Học Tập Suốt Đời
                 </span>
               </div>
@@ -104,18 +106,18 @@ export const Header: React.FC<HeaderProps> = ({
                 <button
                   key={item.id}
                   onClick={() => onSelectTab(item.id)}
-                  className={`px-3 py-1.5 text-sm font-medium transition-colors relative whitespace-nowrap flex items-center gap-1.5 rounded-md ${
+                  className={`px-3 py-1.5 text-sm font-medium transition-colors relative whitespace-nowrap flex items-center gap-1.5 rounded-lg ${
                     isActive
-                      ? 'text-white bg-stone-800'
-                      : 'text-stone-300 hover:text-white hover:bg-stone-800/50'
+                      ? 'text-blue-700 bg-blue-50/90 font-semibold shadow-2xs'
+                      : 'text-slate-600 hover:text-blue-700 hover:bg-slate-100/80'
                   }`}
                 >
                   {item.label}
                   {item.id === 'announcements' && pendingNoticeCount > 0 && (
-                    <span className="w-2 h-2 rounded-full bg-amber-400 inline-block"></span>
+                    <span className="w-2 h-2 rounded-full bg-blue-600 inline-block"></span>
                   )}
                   {isActive && (
-                    <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-amber-500 rounded-full" />
+                    <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-blue-600 rounded-full" />
                   )}
                 </button>
               );
@@ -125,20 +127,20 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={handleUploadClick}
               title={currentAdmin ? 'Đưa tài liệu mới lên cổng thông tin' : 'Chỉ tài khoản quản trị mới có quyền đưa tài liệu lên'}
-              className={`ml-2 px-3 py-1.5 text-xs font-semibold rounded-md transition-colors flex items-center gap-1.5 whitespace-nowrap border ${
+              className={`ml-2 px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors flex items-center gap-1.5 whitespace-nowrap border ${
                 currentAdmin
-                  ? 'text-amber-200 bg-amber-900/80 border-amber-600 hover:bg-amber-800'
-                  : 'text-stone-300 bg-stone-800 border-stone-700 hover:border-amber-500/60 hover:text-amber-200'
+                  ? 'text-white bg-blue-600 border-blue-600 hover:bg-blue-700 shadow-xs'
+                  : 'text-slate-700 bg-slate-100 border-slate-200 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700'
               }`}
             >
               {currentAdmin ? (
                 <>
-                  <PlusCircle className="w-3.5 h-3.5 text-amber-400" />
+                  <PlusCircle className="w-3.5 h-3.5 text-white" />
                   <span>Đưa tài liệu lên</span>
                 </>
               ) : (
                 <>
-                  <Lock className="w-3.5 h-3.5 text-amber-400" />
+                  <Lock className="w-3.5 h-3.5 text-blue-600" />
                   <span>Đưa tài liệu lên (Quản trị)</span>
                 </>
               )}
@@ -150,10 +152,10 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={onOpenSearch}
               aria-label="Tìm kiếm nhanh tài liệu và lịch học"
-              className="p-2 text-stone-300 hover:text-white hover:bg-stone-800 rounded-md transition-colors flex items-center gap-1.5 text-xs font-medium"
+              className="p-2 text-slate-600 hover:text-blue-700 hover:bg-slate-100 rounded-lg transition-colors flex items-center gap-1.5 text-xs font-medium border border-slate-200"
             >
-              <Search className="w-4 h-4" />
-              <span className="hidden xl:inline text-stone-400">Tìm kiếm (Ctrl+K)</span>
+              <Search className="w-4 h-4 text-slate-500" />
+              <span className="hidden xl:inline text-slate-600">Tìm kiếm (Ctrl+K)</span>
             </button>
 
             {/* Admin Authentication Status */}
@@ -161,18 +163,18 @@ export const Header: React.FC<HeaderProps> = ({
               <div className="relative">
                 <button
                   onClick={() => setAdminMenuOpen(!adminMenuOpen)}
-                  className="px-3 py-1.5 text-xs font-medium rounded-md bg-amber-600/90 text-white border border-amber-500 shadow-sm flex items-center gap-1.5 whitespace-nowrap hover:bg-amber-600 transition-colors"
+                  className="px-3 py-1.5 text-xs font-medium rounded-lg bg-blue-700 text-white border border-blue-600 shadow-xs flex items-center gap-1.5 whitespace-nowrap hover:bg-blue-800 transition-colors"
                 >
-                  <ShieldCheck className="w-3.5 h-3.5 text-amber-200" />
+                  <ShieldCheck className="w-3.5 h-3.5 text-sky-200" />
                   <span className="max-w-[120px] sm:max-w-[160px] truncate">{currentAdmin.fullName}</span>
                 </button>
 
                 {adminMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-72 bg-white text-stone-900 rounded-lg shadow-xl border border-stone-200 p-3 z-50 animate-fadeIn text-xs space-y-2.5">
-                    <div className="border-b border-stone-100 pb-2">
-                      <div className="font-semibold text-stone-900">{currentAdmin.fullName}</div>
-                      <div className="text-[11px] text-amber-800">{currentAdmin.roleTitle}</div>
-                      <div className="text-[10px] text-stone-500 mt-0.5">{currentAdmin.agency}</div>
+                  <div className="absolute right-0 mt-2 w-72 bg-white text-slate-900 rounded-xl shadow-xl border border-slate-200 p-3 z-50 animate-fadeIn text-xs space-y-2.5">
+                    <div className="border-b border-slate-100 pb-2">
+                      <div className="font-semibold text-slate-900">{currentAdmin.fullName}</div>
+                      <div className="text-[11px] text-blue-700">{currentAdmin.roleTitle}</div>
+                      <div className="text-[10px] text-slate-500 mt-0.5">{currentAdmin.agency}</div>
                     </div>
                     <div className="flex flex-col gap-1 text-[11px]">
                       <button
@@ -180,9 +182,9 @@ export const Header: React.FC<HeaderProps> = ({
                           setAdminMenuOpen(false);
                           onOpenUploadModal();
                         }}
-                        className="w-full text-left px-2 py-1.5 hover:bg-stone-100 rounded text-stone-800 flex items-center gap-2"
+                        className="w-full text-left px-2 py-1.5 hover:bg-blue-50 hover:text-blue-700 rounded-md text-slate-800 flex items-center gap-2"
                       >
-                        <PlusCircle className="w-3.5 h-3.5 text-amber-700" />
+                        <PlusCircle className="w-3.5 h-3.5 text-blue-600" />
                         <span>Đưa tài liệu mới lên web</span>
                       </button>
                       <button
@@ -190,7 +192,7 @@ export const Header: React.FC<HeaderProps> = ({
                           setAdminMenuOpen(false);
                           onLogoutAdmin();
                         }}
-                        className="w-full text-left px-2 py-1.5 hover:bg-red-50 text-red-600 rounded flex items-center gap-2"
+                        className="w-full text-left px-2 py-1.5 hover:bg-red-50 text-red-600 rounded-md flex items-center gap-2"
                       >
                         <LogOut className="w-3.5 h-3.5" />
                         <span>Đăng xuất quyền Quản trị</span>
@@ -203,9 +205,9 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 onClick={onOpenAdminLogin}
                 title="Đăng nhập tài khoản Quản trị viên để đưa tài liệu và quản lý thông báo"
-                className="px-3 py-1.5 text-xs font-medium rounded-md border border-stone-700 bg-stone-800 text-stone-300 hover:border-amber-500 hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap"
+                className="px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-200 bg-slate-50 text-slate-700 hover:border-blue-500 hover:text-blue-700 hover:bg-blue-50/70 transition-all flex items-center gap-1.5 whitespace-nowrap"
               >
-                <Lock className="w-3.5 h-3.5 text-amber-400" />
+                <Lock className="w-3.5 h-3.5 text-blue-600" />
                 <span className="hidden sm:inline">Đăng nhập Quản trị</span>
                 <span className="sm:hidden">Quản trị</span>
               </button>
@@ -214,7 +216,7 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Mobile Hamburger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-stone-300 hover:text-white hover:bg-stone-800 rounded-md"
+              className="md:hidden p-2 text-slate-700 hover:text-blue-700 hover:bg-slate-100 rounded-lg"
               aria-label="Mở thực đơn di động"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -225,7 +227,7 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-stone-800 bg-stone-900 px-4 pt-3 pb-5 space-y-2">
+        <div className="md:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-5 space-y-2 shadow-lg">
           {navItems.map((item) => (
             <button
               key={item.id}
@@ -233,10 +235,10 @@ export const Header: React.FC<HeaderProps> = ({
                 onSelectTab(item.id);
                 setMobileMenuOpen(false);
               }}
-              className={`w-full flex items-center justify-between px-3 py-2.5 rounded-md text-sm font-medium ${
+              className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium ${
                 activeTab === item.id
-                  ? 'bg-amber-600 text-white'
-                  : 'text-stone-300 hover:bg-stone-800'
+                  ? 'bg-blue-600 text-white'
+                  : 'text-slate-700 hover:bg-slate-100'
               }`}
             >
               <div className="flex items-center gap-2">
@@ -244,7 +246,7 @@ export const Header: React.FC<HeaderProps> = ({
                 <span>{item.label}</span>
               </div>
               {item.id === 'announcements' && pendingNoticeCount > 0 && (
-                <span className="px-1.5 py-0.2 bg-amber-400 text-stone-950 text-[10px] font-bold rounded">
+                <span className="px-1.5 py-0.2 bg-sky-200 text-blue-900 text-[10px] font-bold rounded">
                   {pendingNoticeCount} mới
                 </span>
               )}
@@ -256,9 +258,9 @@ export const Header: React.FC<HeaderProps> = ({
               handleUploadClick();
               setMobileMenuOpen(false);
             }}
-            className="w-full flex items-center justify-center gap-2 px-3 py-2.5 bg-amber-900/60 border border-amber-600/40 text-amber-200 rounded-md text-sm font-medium mt-2"
+            className="w-full flex items-center justify-center gap-2 px-3 py-2.5 bg-blue-50 border border-blue-200 text-blue-800 rounded-lg text-sm font-medium mt-2"
           >
-            {currentAdmin ? <PlusCircle className="w-4 h-4" /> : <Lock className="w-4 h-4 text-amber-400" />}
+            {currentAdmin ? <PlusCircle className="w-4 h-4 text-blue-600" /> : <Lock className="w-4 h-4 text-blue-600" />}
             <span>Đưa tài liệu lên web {currentAdmin ? '' : '(Yêu cầu quản trị)'}</span>
           </button>
         </div>

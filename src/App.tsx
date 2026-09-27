@@ -11,12 +11,16 @@ import {
   RegistrationItem, 
   MainNavTab, 
   UserRole,
-  AdminUser
+  AdminUser,
+  StaffMember,
+  FeedbackItem,
+  FeedbackOfficialResponse
 } from './types';
 import { storageService } from './services/storageService';
 import { Header } from './components/Header';
 import { HeroBanner } from './components/HeroBanner';
 import { OverviewSection } from './components/OverviewSection';
+import { AboutFeedbackView } from './components/AboutFeedbackView';
 import { DocumentLibrary } from './components/DocumentLibrary';
 import { DocumentModal } from './components/DocumentModal';
 import { UploadDocumentModal } from './components/UploadDocumentModal';
@@ -31,6 +35,8 @@ export default function App() {
   const [announcements, setAnnouncements] = useState<AnnouncementItem[]>([]);
   const [classes, setClasses] = useState<ClassScheduleItem[]>([]);
   const [registrations, setRegistrations] = useState<RegistrationItem[]>([]);
+  const [staffMembers, setStaffMembers] = useState<StaffMember[]>([]);
+  const [feedbackList, setFeedbackList] = useState<FeedbackItem[]>([]);
   
   const [activeTab, setActiveTab] = useState<MainNavTab>('overview');
   const [currentAdmin, setCurrentAdmin] = useState<AdminUser | null>(null);
@@ -53,6 +59,8 @@ export default function App() {
     setAnnouncements(storageService.getAnnouncements());
     setClasses(storageService.getClasses());
     setRegistrations(storageService.getRegistrations());
+    setStaffMembers(storageService.getStaff());
+    setFeedbackList(storageService.getFeedback());
 
     const savedAdmin = storageService.getAdminSession();
     if (savedAdmin) {
@@ -259,6 +267,35 @@ Trân trọng phục vụ việc học tập suốt đời của bà con nhân d
     showToast(`Đăng ký thành công cho học viên: ${reg.fullName}!`);
   };
 
+  // Feedback Handlers
+  const handleSubmitFeedback = (newFb: FeedbackItem) => {
+    const updated = storageService.addFeedback(newFb);
+    setFeedbackList(updated);
+    showToast('Đã gửi ý kiến đóng góp của Quý công dân thành công!');
+  };
+
+  const handleReplyFeedback = (id: string, reply: FeedbackOfficialResponse) => {
+    if (!isAdmin) {
+      setAdminActionReason('để trả lời ý kiến của công dân');
+      setIsAdminLoginModalOpen(true);
+      return;
+    }
+    const updated = storageService.replyFeedback(id, reply);
+    setFeedbackList(updated);
+    showToast('Đã xuất bản văn bản phúc đáp ý kiến công dân thành công!');
+  };
+
+  const handleDeleteFeedback = (id: string) => {
+    if (!isAdmin) {
+      setAdminActionReason('để xóa ý kiến công dân');
+      setIsAdminLoginModalOpen(true);
+      return;
+    }
+    const updated = storageService.deleteFeedback(id);
+    setFeedbackList(updated);
+    showToast('Đã xóa ý kiến khỏi danh sách.');
+  };
+
   // Reset Data to sample
   const handleResetData = () => {
     if (window.confirm('Quý cán bộ có chắc muốn khôi phục lại toàn bộ dữ liệu mẫu chuẩn của Xã Long Hồ?')) {
@@ -267,6 +304,8 @@ Trân trọng phục vụ việc học tập suốt đời của bà con nhân d
       setAnnouncements(storageService.getAnnouncements());
       setClasses(storageService.getClasses());
       setRegistrations(storageService.getRegistrations());
+      setStaffMembers(storageService.getStaff());
+      setFeedbackList(storageService.getFeedback());
       showToast('Đã khôi phục dữ liệu mẫu ban đầu thành công!');
     }
   };
@@ -293,11 +332,11 @@ Trân trọng phục vụ việc học tập suốt đời của bà con nhân d
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#faf9f6] text-stone-900 selection:bg-amber-200 selection:text-amber-950 font-sans">
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 selection:bg-blue-100 selection:text-blue-900 font-sans">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-stone-900 text-white border border-stone-700 px-4 py-3 rounded-lg shadow-xl text-xs sm:text-sm font-medium flex items-center gap-2 animate-bounce">
-          <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <div className="fixed bottom-6 right-6 z-50 bg-slate-900 text-white border border-slate-700 px-4 py-3 rounded-xl shadow-2xl text-xs sm:text-sm font-medium flex items-center gap-2 animate-bounce">
+          <span className="w-2 h-2 rounded-full bg-blue-400"></span>
           <span>{toastMessage}</span>
         </div>
       )}
@@ -348,6 +387,22 @@ Trân trọng phục vụ việc học tập suốt đời của bà con nhân d
               }}
             />
           </>
+        )}
+
+        {activeTab === 'about_feedback' && (
+          <AboutFeedbackView
+            staffMembers={staffMembers}
+            feedbackList={feedbackList}
+            userRole={userRole}
+            currentAdmin={currentAdmin}
+            onSubmitFeedback={handleSubmitFeedback}
+            onReplyFeedback={handleReplyFeedback}
+            onDeleteFeedback={handleDeleteFeedback}
+            onRequestAdminLogin={() => {
+              setAdminActionReason('để phúc đáp ý kiến đóng góp của công dân');
+              setIsAdminLoginModalOpen(true);
+            }}
+          />
         )}
 
         {activeTab === 'documents' && (

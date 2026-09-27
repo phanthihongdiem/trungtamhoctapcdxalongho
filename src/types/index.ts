@@ -98,5 +98,38 @@ export interface AdminUser {
   loginAt: string;
 }
 
-export type MainNavTab = 'overview' | 'documents' | 'upload' | 'announcements' | 'schedules';
+export type MainNavTab = 'overview' | 'about_feedback' | 'documents' | 'schedules' | 'announcements' | 'upload';
+
+export interface StaffMember {
+  id: string;
+  stt: number;
+  fullName: string;
+  roleInCenter: string;
+  roleInGovernment: string;
+  phone: string;
+  group: 'ban_giam_doc' | 'can_bo_quan_ly';
+  responsibilities?: string;
+  avatarInitials?: string;
+}
+
+export interface FeedbackOfficialResponse {
+  responderName: string;
+  responderTitle: string;
+  responseDate: string;
+  content: string;
+}
+
+export interface FeedbackItem {
+  id: string;
+  fullName: string;
+  phoneNumber: string;
+  hamlet: string;
+  targetRecipient: string;
+  topic: string;
+  title: string;
+  content: string;
+  createdAt: string;
+  status: 'da_tra_loi' | 'dang_xu_ly';
+  officialResponse?: FeedbackOfficialResponse;
+}
 

@@ -172,11 +172,11 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      {/* Top Classroom Spotlight Banner */}
-      <div className="bg-stone-900 rounded-2xl overflow-hidden border border-stone-800 text-white mb-10 shadow-sm">
+      {/* Top Classroom Spotlight Banner - Radiant Civic Blue */}
+      <div className="bg-gradient-to-br from-[#094074] via-[#125899] to-[#0c4782] rounded-2xl overflow-hidden border border-blue-800 text-white mb-10 shadow-md">
         <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
           <div className="p-6 sm:p-8 lg:col-span-7 space-y-4">
-            <div className="flex items-center gap-2 text-xs font-semibold text-amber-400 uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-xs font-semibold text-sky-300 uppercase tracking-wider">
               <span>Học tập thực chất</span>
               <span>·</span>
               <span>Cầm tay chỉ việc</span>
@@ -188,45 +188,45 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
               Lịch Đào Tạo Nghề & Các Lớp Bồi Dưỡng Cộng Đồng
             </h2>
 
-            <p className="text-stone-300 text-sm leading-relaxed">
-              Các khóa học khuyến nông, tin học ứng dụng và truyền nghề thủ công được tổ chức linh hoạt vào ban đêm và cuối tuần tại Nhà văn hóa 08 ấp để bà con tiện sắp xếp công việc đồng áng.
+            <p className="text-blue-100/90 text-sm leading-relaxed">
+              Các khóa học khuyến nông, tin học ứng dụng và truyền nghề thủ công được tổ chức linh hoạt vào ban đêm và cuối tuần tại Nhà văn hóa 13 ấp để bà con tiện sắp xếp công việc đồng áng.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-2">
               {userRole === 'admin' ? (
                 <button
                   onClick={() => setIsAddClassModalOpen(true)}
-                  className="px-4 py-2.5 bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold rounded-lg flex items-center gap-2 transition-colors shadow-sm"
+                  className="px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg flex items-center gap-2 transition-colors shadow-sm"
                 >
                   <PlusCircle className="w-4 h-4" />
                   <span>Mở lớp học mới lên lịch</span>
                 </button>
               ) : (
-                <div className="text-xs text-amber-200/90 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <div className="text-xs text-blue-100 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-sky-400"></span>
                   <span>Bà con chọn lớp bên dưới và bấm nút <strong>"Đăng ký tham gia"</strong> để giữ chỗ học.</span>
                 </div>
               )}
             </div>
           </div>
 
-          <div className="lg:col-span-5 h-56 lg:h-full relative overflow-hidden bg-stone-800">
+          <div className="lg:col-span-5 h-56 lg:h-full relative overflow-hidden bg-blue-900">
             <img
               src="/src/assets/images/community_learning_class_1790480552310.jpg"
               alt="Lớp học cộng đồng xã Long Hồ"
               referrerPolicy="no-referrer"
-              className="w-full h-full object-cover object-center filter saturate-90 brightness-95"
+              className="w-full h-full object-cover object-center filter saturate-100 brightness-105"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent lg:bg-gradient-to-r lg:from-stone-900 lg:via-transparent lg:to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#094074]/90 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#094074] lg:via-transparent lg:to-transparent" />
           </div>
         </div>
       </div>
 
       {/* Filter Tabs & View Controls */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-stone-200">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
           {topicTabs.map((tab) => {
             const isActive = selectedTopic === tab.id;
@@ -236,8 +236,8 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                 onClick={() => setSelectedTopic(tab.id)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors border ${
                   isActive
-                    ? 'bg-stone-900 text-white border-stone-900 shadow-sm'
-                    : 'bg-white text-stone-600 border-stone-200 hover:border-stone-400 hover:text-stone-900'
+                    ? 'bg-blue-600 text-white border-blue-600 shadow-xs'
+                    : 'bg-white text-slate-600 border-slate-200 hover:border-blue-400 hover:text-blue-700 hover:bg-blue-50/50'
                 }`}
               >
                 {tab.label}
@@ -247,11 +247,11 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
         </div>
 
         {/* View mode toggle */}
-        <div className="flex items-center gap-1 bg-stone-200/70 p-1 rounded-lg text-xs shrink-0 self-start sm:self-auto">
+        <div className="flex items-center gap-1 bg-slate-200/70 p-1 rounded-lg text-xs shrink-0 self-start sm:self-auto">
           <button
             onClick={() => setViewMode('cards')}
             className={`px-3 py-1 rounded-md font-medium transition-colors ${
-              viewMode === 'cards' ? 'bg-white text-stone-900 shadow-xs' : 'text-stone-600'
+              viewMode === 'cards' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
             }`}
           >
             Dạng lưới
@@ -259,7 +259,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
           <button
             onClick={() => setViewMode('timeline')}
             className={`px-3 py-1 rounded-md font-medium transition-colors ${
-              viewMode === 'timeline' ? 'bg-white text-stone-900 shadow-xs' : 'text-stone-600'
+              viewMode === 'timeline' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
             }`}
           >
             Thời khóa biểu
@@ -270,7 +270,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
       {/* Class Items Display */}
       <div className="mt-8">
         {filteredClasses.length === 0 ? (
-          <div className="p-8 text-center bg-white rounded-xl border border-stone-200 text-stone-500 text-sm">
+          <div className="p-8 text-center bg-white rounded-xl border border-slate-200 text-slate-500 text-sm">
             Hiện chưa có lớp học thuộc chuyên mục này. Quý bà con có thể đề xuất nhu cầu học với Trung tâm.
           </div>
         ) : viewMode === 'cards' ? (
@@ -285,15 +285,15 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                   key={item.id}
                   className={`bg-white rounded-xl border overflow-hidden transition-all duration-200 flex flex-col justify-between ${
                     isHighlighted
-                      ? 'ring-2 ring-amber-500 border-amber-500 shadow-md'
-                      : 'border-stone-200 hover:border-stone-300 hover:shadow-sm'
+                      ? 'ring-2 ring-blue-500 border-blue-500 shadow-md'
+                      : 'border-slate-200 hover:border-blue-300 hover:shadow-md'
                   }`}
                 >
                   <div className="p-6 space-y-4">
                     {/* Unboxed Metadata Header */}
-                    <div className="flex items-center justify-between text-xs text-stone-500">
+                    <div className="flex items-center justify-between text-xs text-slate-500">
                       <div className="flex items-center gap-1.5 truncate">
-                        <span className="font-semibold text-amber-800">{item.topicLabel}</span>
+                        <span className="font-semibold text-blue-800">{item.topicLabel}</span>
                         <span aria-hidden="true">·</span>
                         <span>{item.sessionDays}</span>
                       </div>
@@ -304,40 +304,40 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                     </div>
 
                     {/* Class Title */}
-                    <h3 className="font-serif font-bold text-xl text-stone-900 leading-snug">
+                    <h3 className="font-serif font-bold text-xl text-slate-900 leading-snug">
                       {item.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-stone-600 text-xs sm:text-sm leading-relaxed line-clamp-2">
+                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed line-clamp-2">
                       {item.description}
                     </p>
 
                     {/* Key Details Grid */}
-                    <div className="space-y-2 py-3 border-y border-stone-100 text-xs text-stone-700">
+                    <div className="space-y-2 py-3 border-y border-slate-100 text-xs text-slate-700">
                       <div className="flex items-start gap-2.5">
-                        <Clock className="w-4 h-4 text-stone-400 shrink-0 mt-0.5" />
+                        <Clock className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
                         <div>
-                          <div className="font-semibold text-stone-800">{item.timeSlot}</div>
-                          <div className="text-stone-500">
+                          <div className="font-semibold text-slate-800">{item.timeSlot}</div>
+                          <div className="text-slate-500">
                             Từ ngày {new Date(item.startDate).toLocaleDateString('vi-VN')} đến {new Date(item.endDate).toLocaleDateString('vi-VN')}
                           </div>
                         </div>
                       </div>
 
                       <div className="flex items-start gap-2.5">
-                        <MapPin className="w-4 h-4 text-stone-400 shrink-0 mt-0.5" />
+                        <MapPin className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
                         <div>
-                          <div className="font-semibold text-stone-800">{item.venue}</div>
-                          <div className="text-stone-500">{item.addressNote}</div>
+                          <div className="font-semibold text-slate-800">{item.venue}</div>
+                          <div className="text-slate-500">{item.addressNote}</div>
                         </div>
                       </div>
 
                       <div className="flex items-start gap-2.5">
-                        <User className="w-4 h-4 text-stone-400 shrink-0 mt-0.5" />
+                        <User className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
                         <div>
-                          <span className="font-semibold text-stone-800">{item.instructor}</span>
-                          <span className="text-stone-500"> ({item.instructorTitle})</span>
+                          <span className="font-semibold text-slate-800">{item.instructor}</span>
+                          <span className="text-slate-500"> ({item.instructorTitle})</span>
                         </div>
                       </div>
                     </div>
@@ -345,20 +345,20 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                     {/* Capacity and Registration Progress Bar */}
                     <div className="space-y-1.5">
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-stone-500">Sĩ số & Số chỗ còn lại:</span>
-                        <span className="tabular-nums font-semibold text-stone-800">
+                        <span className="text-slate-500">Sĩ số & Số chỗ còn lại:</span>
+                        <span className="tabular-nums font-semibold text-slate-800">
                           {item.registeredCount} / {item.capacity} học viên
                           {remaining > 0 ? (
-                            <span className="text-amber-700 ml-1.5 font-normal">(còn {remaining} chỗ)</span>
+                            <span className="text-blue-700 ml-1.5 font-normal">(còn {remaining} chỗ)</span>
                           ) : (
                             <span className="text-red-600 ml-1.5 font-normal">(Đã đủ chỉ tiêu)</span>
                           )}
                         </span>
                       </div>
-                      <div className="w-full h-2 bg-stone-100 rounded-full overflow-hidden">
+                      <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
                         <div
                           className={`h-full rounded-full transition-all duration-300 ${
-                            isFull ? 'bg-red-500' : 'bg-amber-600'
+                            isFull ? 'bg-red-500' : 'bg-blue-600'
                           }`}
                           style={{ width: `${Math.min(100, (item.registeredCount / item.capacity) * 100)}%` }}
                         />
@@ -367,9 +367,9 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                   </div>
 
                   {/* Card Bottom Controls */}
-                  <div className="px-6 py-4 bg-stone-50/90 border-t border-stone-100 flex flex-wrap items-center justify-between gap-3">
-                    <div className="text-xs text-stone-500 flex items-center gap-1.5">
-                      <Phone className="w-3.5 h-3.5 text-stone-400" />
+                  <div className="px-6 py-4 bg-slate-50/90 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                    <div className="text-xs text-slate-500 flex items-center gap-1.5">
+                      <Phone className="w-3.5 h-3.5 text-slate-400" />
                       <span>Tư vấn: {item.contactPhone}</span>
                     </div>
 
@@ -378,7 +378,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                         <>
                           <button
                             onClick={() => setViewingRegistrationsClass(item)}
-                            className="px-3 py-1.5 bg-stone-200 hover:bg-stone-300 text-stone-800 rounded text-xs font-medium flex items-center gap-1 transition-colors"
+                            className="px-3 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-lg text-xs font-medium flex items-center gap-1 transition-colors"
                             title="Xem danh sách học viên đăng ký"
                           >
                             <Users className="w-3.5 h-3.5" />
@@ -387,7 +387,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
 
                           <button
                             onClick={() => onDeleteClass(item.id)}
-                            className="p-1.5 text-stone-400 hover:text-red-600 rounded transition-colors"
+                            className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg transition-colors"
                             title="Xóa lớp học này"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -398,10 +398,10 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                       <button
                         disabled={isFull}
                         onClick={() => setRegisteringClass(item)}
-                        className={`px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-xs ${
+                        className={`px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-2xs ${
                           isFull
-                            ? 'bg-stone-300 text-stone-500 cursor-not-allowed'
-                            : 'bg-amber-700 hover:bg-amber-600 text-white'
+                            ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                            : 'bg-blue-600 hover:bg-blue-700 text-white'
                         }`}
                       >
                         <Check className="w-3.5 h-3.5" />
@@ -415,10 +415,10 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
           </div>
         ) : (
           /* Timeline / Table View */
-          <div className="bg-white rounded-xl border border-stone-200 overflow-hidden shadow-xs">
+          <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-stone-700">
-                <thead className="bg-stone-100 text-stone-800 uppercase font-semibold border-b border-stone-200 text-[11px]">
+              <table className="w-full text-left text-xs text-slate-700">
+                <thead className="bg-slate-100 text-slate-800 uppercase font-semibold border-b border-slate-200 text-[11px]">
                   <tr>
                     <th className="px-4 py-3">Lớp học & Chuyên đề</th>
                     <th className="px-4 py-3">Thời gian học</th>
@@ -428,34 +428,34 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                     <th className="px-4 py-3 text-right">Thao tác</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-stone-100">
+                <tbody className="divide-y divide-slate-100">
                   {filteredClasses.map((item) => (
-                    <tr key={item.id} className="hover:bg-stone-50/80 transition-colors">
-                      <td className="px-4 py-3.5 font-medium text-stone-900 max-w-xs">
+                    <tr key={item.id} className="hover:bg-slate-50/80 transition-colors">
+                      <td className="px-4 py-3.5 font-medium text-slate-900 max-w-xs">
                         <div className="font-semibold text-sm">{item.title}</div>
-                        <div className="text-[11px] text-amber-800">{item.topicLabel}</div>
+                        <div className="text-[11px] text-blue-700 font-medium">{item.topicLabel}</div>
                       </td>
                       <td className="px-4 py-3.5 whitespace-nowrap">
-                        <div className="font-semibold text-stone-800">{item.timeSlot}</div>
-                        <div className="text-stone-500 text-[11px]">{item.sessionDays}</div>
+                        <div className="font-semibold text-slate-800">{item.timeSlot}</div>
+                        <div className="text-slate-500 text-[11px]">{item.sessionDays}</div>
                       </td>
                       <td className="px-4 py-3.5 max-w-xs">
-                        <div className="text-stone-800">{item.venue}</div>
-                        <div className="text-stone-400 text-[11px]">{item.addressNote}</div>
+                        <div className="text-slate-800">{item.venue}</div>
+                        <div className="text-slate-400 text-[11px]">{item.addressNote}</div>
                       </td>
                       <td className="px-4 py-3.5">
-                        <div className="font-medium text-stone-800">{item.instructor}</div>
-                        <div className="text-stone-400 text-[11px]">{item.instructorTitle}</div>
+                        <div className="font-medium text-slate-800">{item.instructor}</div>
+                        <div className="text-slate-400 text-[11px]">{item.instructorTitle}</div>
                       </td>
                       <td className="px-4 py-3.5 text-center whitespace-nowrap tabular-nums">
-                        <span className="font-semibold text-stone-800">{item.registeredCount}</span>
-                        <span className="text-stone-400"> / {item.capacity}</span>
+                        <span className="font-semibold text-slate-800">{item.registeredCount}</span>
+                        <span className="text-slate-400"> / {item.capacity}</span>
                       </td>
                       <td className="px-4 py-3.5 text-right whitespace-nowrap">
                         <button
                           onClick={() => setRegisteringClass(item)}
                           disabled={item.registeredCount >= item.capacity}
-                          className="px-3 py-1.5 bg-amber-700 hover:bg-amber-600 disabled:bg-stone-200 disabled:text-stone-400 text-white rounded text-xs font-semibold transition-colors"
+                          className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-200 disabled:text-slate-400 text-white rounded-lg text-xs font-semibold transition-colors shadow-2xs"
                         >
                           Đăng ký
                         </button>
@@ -471,29 +471,29 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
 
       {/* Citizen Registration Modal */}
       {registeringClass && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-stone-950/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 animate-fadeIn">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 animate-fadeIn">
           <div 
-            className="relative w-full max-w-lg bg-white text-stone-900 rounded-xl shadow-2xl border border-stone-200 overflow-hidden flex flex-col"
+            className="relative w-full max-w-lg bg-white text-slate-900 rounded-xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between px-6 py-4 bg-stone-900 text-stone-100 border-b border-stone-800">
+            <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-blue-900 to-blue-800 text-white border-b border-blue-700">
               <div>
                 <h3 className="font-serif font-bold text-base text-white">
                   Đăng Ký Tham Gia Lớp Học
                 </h3>
-                <p className="text-xs text-amber-300">
+                <p className="text-xs text-sky-200">
                   {registeringClass.title}
                 </p>
               </div>
               <button
                 onClick={() => setRegisteringClass(null)}
-                className="text-stone-400 hover:text-white"
+                className="text-slate-300 hover:text-white"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="p-6 space-y-4 bg-[#faf8f5]">
+            <div className="p-6 space-y-4 bg-slate-50">
               {regSuccess ? (
                 <div className="p-4 bg-emerald-50 border border-emerald-300 rounded-lg text-center space-y-2">
                   <CheckCircle className="w-10 h-10 text-emerald-600 mx-auto" />
@@ -506,14 +506,14 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                 </div>
               ) : (
                 <form onSubmit={handleRegisterSubmit} className="space-y-4">
-                  <div className="p-3 bg-stone-100 rounded-lg text-xs text-stone-600 space-y-1">
+                  <div className="p-3 bg-white rounded-lg border border-slate-200 text-xs text-slate-600 space-y-1">
                     <div><strong>Thời gian:</strong> {registeringClass.timeSlot} ({registeringClass.sessionDays})</div>
                     <div><strong>Địa điểm:</strong> {registeringClass.venue}</div>
                     <div><strong>Học phí:</strong> Hoàn toàn miễn phí 100%</div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-stone-700 mb-1">
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
                       Họ và tên người học <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -522,13 +522,13 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                       value={regFullName}
                       onChange={(e) => setRegFullName(e.target.value)}
                       placeholder="Ví dụ: Nguyễn Văn Hai..."
-                      className="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-sm focus:ring-2 focus:ring-amber-500/40 focus:border-amber-500"
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-xs font-semibold text-stone-700 mb-1">
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">
                         Số điện thoại liên hệ <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -537,12 +537,12 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                         value={regPhone}
                         onChange={(e) => setRegPhone(e.target.value)}
                         placeholder="0918.xxx.xxx"
-                        className="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-sm focus:ring-2 focus:ring-amber-500/40 focus:border-amber-500"
+                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-stone-700 mb-1">
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">
                         Năm sinh (tùy chọn)
                       </label>
                       <input
@@ -550,19 +550,19 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                         value={regBirthYear}
                         onChange={(e) => setRegBirthYear(e.target.value)}
                         placeholder="Ví dụ: 1978"
-                        className="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-sm focus:ring-2 focus:ring-amber-500/40 focus:border-amber-500"
+                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-stone-700 mb-1">
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
                       Ấp cư trú trên địa bàn Xã Long Hồ <span className="text-red-500">*</span>
                     </label>
                     <select
                       value={regHamlet}
                       onChange={(e) => setRegHamlet(e.target.value)}
-                      className="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-sm focus:ring-2 focus:ring-amber-500/40 focus:border-amber-500"
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500"
                     >
                       {HAMLETS_LIST.map((h) => (
                         <option key={h} value={h}>
@@ -573,7 +573,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-stone-700 mb-1">
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
                       Nguyện vọng / Câu hỏi gửi giảng viên (nếu có)
                     </label>
                     <textarea
@@ -581,21 +581,21 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                       value={regNote}
                       onChange={(e) => setRegNote(e.target.value)}
                       placeholder="Ví dụ: Nhà có vườn cam sành đang bị vàng lá, muốn hỏi thêm cách khắc phục..."
-                      className="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-sm focus:ring-2 focus:ring-amber-500/40 focus:border-amber-500"
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500"
                     />
                   </div>
 
-                  <div className="flex items-center justify-end gap-2 pt-3 border-t border-stone-200">
+                  <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-200">
                     <button
                       type="button"
                       onClick={() => setRegisteringClass(null)}
-                      className="px-4 py-2 bg-stone-200 hover:bg-stone-300 text-stone-800 rounded text-xs font-semibold"
+                      className="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-lg text-xs font-semibold"
                     >
                       Đóng
                     </button>
                     <button
                       type="submit"
-                      className="px-5 py-2 bg-amber-700 hover:bg-amber-600 text-white rounded text-xs font-semibold shadow-sm"
+                      className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow-xs"
                     >
                       Xác nhận đăng ký học
                     </button>
@@ -609,23 +609,23 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
 
       {/* Admin View Attendees Modal */}
       {viewingRegistrationsClass && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-stone-950/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 animate-fadeIn">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 animate-fadeIn">
           <div 
-            className="relative w-full max-w-3xl bg-white text-stone-900 rounded-xl shadow-2xl border border-stone-200 overflow-hidden flex flex-col max-h-[90vh]"
+            className="relative w-full max-w-3xl bg-white text-slate-900 rounded-xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between px-6 py-4 bg-stone-900 text-stone-100 border-b border-stone-800">
+            <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-blue-900 to-blue-800 text-white border-b border-blue-700">
               <div>
                 <h3 className="font-serif font-bold text-base text-white">
                   Danh Sách Học Viên Đăng Ký ({currentClassAttendees.length} người)
                 </h3>
-                <div className="text-xs text-amber-300 truncate max-w-lg">
+                <div className="text-xs text-sky-200 truncate max-w-lg">
                   {viewingRegistrationsClass.title}
                 </div>
               </div>
               <button
                 onClick={() => setViewingRegistrationsClass(null)}
-                className="text-stone-400 hover:text-white"
+                className="text-slate-300 hover:text-white"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -633,13 +633,13 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
 
             <div className="p-6 overflow-y-auto flex-1 space-y-4">
               {currentClassAttendees.length === 0 ? (
-                <div className="text-center py-8 text-stone-500 text-xs">
+                <div className="text-center py-8 text-slate-500 text-xs">
                   Chưa có lượt đăng ký trực tuyến nào cho lớp học này.
                 </div>
               ) : (
-                <div className="border border-stone-200 rounded-lg overflow-hidden">
-                  <table className="w-full text-left text-xs text-stone-800">
-                    <thead className="bg-stone-100 font-semibold text-stone-700 border-b border-stone-200">
+                <div className="border border-slate-200 rounded-lg overflow-hidden">
+                  <table className="w-full text-left text-xs text-slate-800">
+                    <thead className="bg-slate-100 font-semibold text-slate-700 border-b border-slate-200">
                       <tr>
                         <th className="px-3 py-2.5">STT</th>
                         <th className="px-3 py-2.5">Họ và tên</th>
@@ -649,15 +649,15 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                         <th className="px-3 py-2.5">Thời gian ĐK</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-stone-100">
+                    <tbody className="divide-y divide-slate-100">
                       {currentClassAttendees.map((att, idx) => (
-                        <tr key={att.id} className="hover:bg-stone-50">
-                          <td className="px-3 py-2.5 text-stone-400 tabular-nums">{idx + 1}</td>
-                          <td className="px-3 py-2.5 font-semibold text-stone-900">{att.fullName}</td>
-                          <td className="px-3 py-2.5 font-mono text-stone-700">{att.phoneNumber}</td>
+                        <tr key={att.id} className="hover:bg-slate-50">
+                          <td className="px-3 py-2.5 text-slate-400 tabular-nums">{idx + 1}</td>
+                          <td className="px-3 py-2.5 font-semibold text-slate-900">{att.fullName}</td>
+                          <td className="px-3 py-2.5 font-mono text-slate-700">{att.phoneNumber}</td>
                           <td className="px-3 py-2.5">{att.hamlet}</td>
-                          <td className="px-3 py-2.5 tabular-nums text-stone-500">{att.yearOfBirth || '-'}</td>
-                          <td className="px-3 py-2.5 text-stone-400 text-[11px] tabular-nums">{att.registeredAt}</td>
+                          <td className="px-3 py-2.5 tabular-nums text-slate-500">{att.yearOfBirth || '-'}</td>
+                          <td className="px-3 py-2.5 text-slate-400 text-[11px] tabular-nums">{att.registeredAt}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -666,13 +666,13 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
               )}
             </div>
 
-            <div className="px-6 py-3.5 bg-stone-100 border-t border-stone-200 flex items-center justify-between text-xs">
-              <span className="text-stone-500">
+            <div className="px-6 py-3.5 bg-slate-100 border-t border-slate-200 flex items-center justify-between text-xs">
+              <span className="text-slate-500">
                 Xuất file danh sách phục vụ điểm danh và cấp chứng nhận hoàn thành.
               </span>
               <button
                 onClick={() => alert('Đã sao chép danh sách học viên vào bộ nhớ tạm để dán vào Excel!')}
-                className="px-3 py-1.5 bg-stone-800 hover:bg-stone-700 text-white rounded font-medium flex items-center gap-1.5"
+                className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-lg font-medium flex items-center gap-1.5"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Sao chép danh sách Excel</span>
@@ -684,26 +684,26 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
 
       {/* Admin Add Class Modal */}
       {isAddClassModalOpen && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-stone-950/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 animate-fadeIn">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 animate-fadeIn">
           <div 
-            className="relative w-full max-w-2xl bg-white text-stone-900 rounded-xl shadow-2xl border border-stone-200 overflow-hidden flex flex-col max-h-[92vh]"
+            className="relative w-full max-w-2xl bg-white text-slate-900 rounded-xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[92vh]"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between px-6 py-4 bg-stone-900 text-stone-100 border-b border-stone-800">
+            <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-blue-900 to-blue-800 text-white border-b border-blue-700">
               <h3 className="font-serif font-bold text-base text-white">
                 Mở Lớp Học / Chuyên Đề Mới Lên Lịch Học
               </h3>
               <button
                 onClick={() => setIsAddClassModalOpen(false)}
-                className="text-stone-400 hover:text-white"
+                className="text-slate-300 hover:text-white"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <form onSubmit={handleCreateClass} className="p-6 space-y-4 overflow-y-auto flex-1 bg-[#faf8f5]">
+            <form onSubmit={handleCreateClass} className="p-6 space-y-4 overflow-y-auto flex-1 bg-slate-50">
               <div>
-                <label className="block text-xs font-semibold text-stone-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Tên lớp học / Chuyên đề bồi dưỡng <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -712,19 +712,19 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                   value={newTitle}
                   onChange={(e) => setNewTitle(e.target.value)}
                   placeholder="Ví dụ: Kỹ thuật trồng nấm rơm trong nhà..."
-                  className="w-full px-3 py-2 bg-white border border-stone-300 rounded text-sm focus:ring-2 focus:ring-amber-500/40"
+                  className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500/40"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-stone-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
                     Lĩnh vực đào tạo
                   </label>
                   <select
                     value={newTopic}
                     onChange={(e) => setNewTopic(e.target.value as Exclude<DocumentCategory, 'all'>)}
-                    className="w-full px-3 py-2 bg-white border border-stone-300 rounded text-sm"
+                    className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm"
                   >
                     <option value="nong_nghiep">Kỹ thuật nông nghiệp</option>
                     <option value="chuyen_doi_so">Chuyển đổi số & Tin học</option>
@@ -735,7 +735,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-stone-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
                     Chỉ tiêu tuyển sinh (Sĩ số tối đa)
                   </label>
                   <input
@@ -744,14 +744,14 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                     max={200}
                     value={newCapacity}
                     onChange={(e) => setNewCapacity(parseInt(e.target.value) || 30)}
-                    className="w-full px-3 py-2 bg-white border border-stone-300 rounded text-sm"
+                    className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-stone-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
                     Giảng viên / Báo cáo viên phụ trách <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -760,12 +760,12 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                     value={newInstructor}
                     onChange={(e) => setNewInstructor(e.target.value)}
                     placeholder="Ví dụ: Kỹ sư Lê Văn Bình..."
-                    className="w-full px-3 py-2 bg-white border border-stone-300 rounded text-sm"
+                    className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-stone-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
                     Học vị / Đơn vị công tác
                   </label>
                   <input
@@ -773,14 +773,14 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                     value={newInstructorTitle}
                     onChange={(e) => setNewInstructorTitle(e.target.value)}
                     placeholder="Ví dụ: Cán bộ Trạm Khuyến nông..."
-                    className="w-full px-3 py-2 bg-white border border-stone-300 rounded text-sm"
+                    className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-stone-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
                     Khung giờ học
                   </label>
                   <input
@@ -788,12 +788,12 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                     value={newTimeSlot}
                     onChange={(e) => setNewTimeSlot(e.target.value)}
                     placeholder="07:30 - 11:30 hoặc 18:30 - 20:30"
-                    className="w-full px-3 py-2 bg-white border border-stone-300 rounded text-sm"
+                    className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-stone-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
                     Các ngày học trong tuần
                   </label>
                   <input
@@ -801,14 +801,14 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                     value={newSessionDays}
                     onChange={(e) => setNewSessionDays(e.target.value)}
                     placeholder="Thứ Bảy, Chủ Nhật hoặc Thứ Ba, Năm, Bảy"
-                    className="w-full px-3 py-2 bg-white border border-stone-300 rounded text-sm"
+                    className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-stone-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
                     Địa điểm tổ chức
                   </label>
                   <input
@@ -816,25 +816,25 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                     value={newVenue}
                     onChange={(e) => setNewVenue(e.target.value)}
                     placeholder="Hội trường UBND Xã, Nhà sinh hoạt Ấp..."
-                    className="w-full px-3 py-2 bg-white border border-stone-300 rounded text-sm"
+                    className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-stone-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
                     Địa chỉ cụ thể
                   </label>
                   <input
                     type="text"
                     value={newAddress}
                     onChange={(e) => setNewAddress(e.target.value)}
-                    className="w-full px-3 py-2 bg-white border border-stone-300 rounded text-sm"
+                    className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-stone-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Mô tả mục tiêu khóa học & quyền lợi học viên
                 </label>
                 <textarea
@@ -842,21 +842,21 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                   value={newDescription}
                   onChange={(e) => setNewDescription(e.target.value)}
                   placeholder="Mô tả tóm tắt kỹ năng đạt được sau khóa học..."
-                  className="w-full px-3 py-2 bg-white border border-stone-300 rounded text-sm"
+                  className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-3 border-t border-stone-200">
+              <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-200">
                 <button
                   type="button"
                   onClick={() => setIsAddClassModalOpen(false)}
-                  className="px-4 py-2 bg-stone-200 hover:bg-stone-300 text-stone-800 rounded text-xs font-semibold"
+                  className="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-lg text-xs font-semibold"
                 >
                   Hủy
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-amber-700 hover:bg-amber-600 text-white rounded text-xs font-semibold shadow-sm"
+                  className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow-xs"
                 >
                   Đăng lịch học lên web
                 </button>
